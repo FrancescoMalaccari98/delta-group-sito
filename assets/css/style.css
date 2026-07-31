@@ -350,7 +350,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .cookie a{color:var(--text-d);border-bottom:1px solid rgba(244,246,248,.3)}
 .cookie-actions{display:flex;gap:8px}
 .cookie-actions .btn{flex:1}
-@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:calc(85px + env(safe-area-inset-bottom));padding-bottom:16px}}
+body.has-cookie .actionbar{transform:translateY(110%);opacity:0;pointer-events:none}
 
 /* ---------- Legali ---------- */
 .legal{color:var(--text-l)}

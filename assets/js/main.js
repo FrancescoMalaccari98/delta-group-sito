@@ -149,8 +149,8 @@
   var consenso = null;
   try { consenso = localStorage.getItem(KEY); } catch (e) {}
   if (consenso === 'si') caricaMappe();
-  else if (banner) banner.hidden = false;
-  function salva(v) { try { localStorage.setItem(KEY, v); } catch (e) {} if (banner) banner.hidden = true; }
+  else if (banner) { banner.hidden = false; d.body.classList.add('has-cookie'); }
+  function salva(v) { try { localStorage.setItem(KEY, v); } catch (e) {} if (banner) banner.hidden = true; d.body.classList.remove('has-cookie'); }
   var ok = q('#cookieOk'), no = q('#cookieNo');
   if (ok) ok.addEventListener('click', function () { salva('si'); caricaMappe(); });
   if (no) no.addEventListener('click', function () { salva('no'); });
