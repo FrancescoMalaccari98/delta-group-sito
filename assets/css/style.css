@@ -353,6 +353,9 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .cookie{transition:bottom .28s cubic-bezier(.22,.7,.3,1)}
 body.has-actionbar .cookie{bottom:var(--ab-h,0px)}
 body.has-cookie .actionbar{transform:none;opacity:1}
+/* mentre si compila un campo (tastiera aperta) la barra azioni si ritira */
+body.is-typing .actionbar{transform:translateY(110%);opacity:0;pointer-events:none}
+body.is-typing .cookie{bottom:0}
 
 /* ---------- Legali ---------- */
 .legal{color:var(--text-l)}
@@ -619,9 +622,11 @@ body.has-cookie .actionbar{transform:none;opacity:1}
 .check input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--accent)}
 .check a{border-bottom:1px solid #C9C4B9}
 .check a:hover{color:var(--accent);border-color:var(--accent)}
-.bk-ok{background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l);padding:20px 18px 22px}
+.bk-ok{background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l);padding:20px 18px 22px;text-align:center}
 .bk-ok h2{font-size:34px;line-height:1.02;color:var(--text-l);margin:0 0 8px}
 .bk-ok .lede{color:var(--muted-l);margin-bottom:16px}
+.bk-ok .badge{margin-left:auto;margin-right:auto}
+.bk-ok .bk-list{text-align:left}
 .bk-ok-logo{width:172px;height:172px;margin:10px auto 24px;display:block}
 .bk-list{margin:0 0 20px;padding:0;border-top:1px solid #EDEBE6}
 .bk-list>div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #EDEBE6}

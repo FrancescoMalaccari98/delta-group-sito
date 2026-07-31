@@ -35,6 +35,24 @@
     d.documentElement.style.setProperty('--ab-h', hh + 'px');
   }
 
+  /* Campi in compilazione: la barra azioni non copre la tastiera */
+  var timerDigita = null;
+  function campoTesto(t) {
+    return t && /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName) &&
+      !/^(checkbox|radio|button|submit|reset)$/i.test(t.type || '');
+  }
+  d.addEventListener('focusin', function (e) {
+    if (!campoTesto(e.target)) return;
+    if (timerDigita) { clearTimeout(timerDigita); timerDigita = null; }
+    d.body.classList.add('is-typing');
+  });
+  d.addEventListener('focusout', function (e) {
+    if (!campoTesto(e.target)) return;
+    timerDigita = setTimeout(function () {
+      if (!campoTesto(d.activeElement)) d.body.classList.remove('is-typing');
+    }, 160);
+  });
+
   /* ---------- Menu mobile ---------- */
   var drawer = q('#drawer'), openBtn = q('#menuOpen'), closeBtn = q('#menuClose'), lastFocus = null;
   function openDrawer() {
