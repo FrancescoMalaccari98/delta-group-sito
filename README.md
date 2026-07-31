@@ -64,7 +64,7 @@ Per provare la versione mobile dal PC: in Chrome premi F12 → icona telefono �
 
 - [ ] Sostituire le 9 fotografie (vedi `assets/img/FOTO.md`) e scrivere gli `alt`.
 - [ ] Inserire il logo vettoriale e allineare l'arancione `--accent` al file originale
-      (ora `#FF7A18`, in `assets/css/style.css`).
+      (ora `#F7931D`, in `assets/css/style.css`).
 - [ ] Confermare l'anno "Revisioni in sede dal 1997".
 - [ ] Compilare Privacy Policy e Cookie Policy.
 - [ ] Aggiungere favicon e immagine Open Graph.
@@ -84,3 +84,10 @@ Per provare la versione mobile dal PC: in Chrome premi F12 → icona telefono �
 - **Accordion:** elementi `<details>` nativi, funzionano anche senza JavaScript.
 - Header, menu e footer sono ripetuti nelle tre pagine: modificandone uno, allinea anche gli altri
   (è il compromesso del progetto senza build).
+
+## Aggiornamento — luglio 2026
+
+- Desktop: contenuto sotto l'header ridotto di circa il 15% (titoli, testi, immagini); header invariato.
+- Spaziature verticali delle sezioni dimezzate su mobile, tablet e desktop.
+- Privacy e Cookie Policy: nel menu di navigazione mobile (targa in basso) e nella fascia legale in fondo a ogni pagina.
+- Pagina Contatti: recapiti in fascia scura a tutta larghezza (`.channels`), sede e orari tipografici con evidenza del giorno corrente (`.hour-row` + chip OGGI), mappa più grande. Rimossa la vecchia `.info-card`.

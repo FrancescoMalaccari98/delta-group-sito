@@ -1,5 +1,11 @@
 # Fotografie da inserire
 
+> **Stato attuale:** i placeholder mostrano foto temporanee di Pexels (licenza libera, uso
+> commerciale consentito, nessuna attribuzione obbligatoria) caricate dal loro CDN. Servono solo
+> per valutare l'impaginazione: vanno sostituite con gli scatti reali dell'officina prima della
+> pubblicazione. Ogni foto è applicata con un attributo `style="background-image:url(...)"` nel
+> tag del placeholder: si sostituisce quel valore, o meglio si passa a un `<img>` locale.
+
 Nomi file definitivi: il codice li richiama con questi nomi.
 Formato consigliato: **WebP** (qualità 80), oltre a un JPG di riserva se necessario.
 

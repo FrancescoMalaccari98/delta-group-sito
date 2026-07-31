@@ -85,20 +85,49 @@
     }
   }
 
-  /* ---------- Menu ancore: voce attiva ---------- */
-  var anchors = qa('.anchor-scroll a');
-  if (anchors.length && 'IntersectionObserver' in window) {
-    var map = {};
-    anchors.forEach(function (a) { var t = q(a.getAttribute('href')); if (t) map[t.id] = a; });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) {
-        if (en.isIntersecting && map[en.target.id]) {
-          anchors.forEach(function (a) { a.classList.remove('is-active'); });
-          map[en.target.id].classList.add('is-active');
-        }
+  /* ---------- Orari: evidenzia il giorno corrente ---------- */
+  qa('.hour-row[data-day]').forEach(function (row) {
+    var g = new Date().getDay(), spec = row.getAttribute('data-day'), on = false;
+    if (spec.indexOf('-') > -1) { var p = spec.split('-'); on = g >= +p[0] && g <= +p[1]; }
+    else { on = g === +spec; }
+    var chip = q('.today', row);
+    if (on && chip) chip.hidden = false;
+  });
+
+  /* ---------- Schede dei servizi ----------
+     Una sola sezione visibile per volta. Di default GPL e metano.
+     L'indirizzo mantiene #revisioni, #officina ecc., quindi i link dalla home funzionano. */
+  var tabs = qa('.anchor-scroll a');
+  if (tabs.length) {
+    var ids = tabs.map(function (a) { return (a.getAttribute('href') || '').replace('#', ''); });
+    var panels = ids.map(function (id) { return d.getElementById(id); });
+    var bar = q('.anchor-nav');
+
+    function mostra(id, vaiSu) {
+      if (ids.indexOf(id) === -1) id = ids[0];
+      panels.forEach(function (p, i) { if (p) p.hidden = ids[i] !== id; });
+      /* la scheda mostrata è subito leggibile: niente attesa dell'animazione di comparsa */
+      var att0 = panels[ids.indexOf(id)];
+      if (att0) qa('.reveal', att0).forEach(function (el) { el.classList.add('is-in'); });
+      tabs.forEach(function (a, i) { a.classList.toggle('is-active', ids[i] === id); });
+      var att = tabs[ids.indexOf(id)];
+      if (att && att.scrollIntoViewIfNeeded) att.scrollIntoViewIfNeeded();
+      if (vaiSu && bar) {
+        var hh = q('.site-header') ? q('.site-header').offsetHeight : 58;
+        var y = bar.getBoundingClientRect().top + window.pageYOffset - hh;
+        window.scrollTo({ top: Math.max(0, Math.round(y)), behavior: 'smooth' });
+      }
+    }
+
+    tabs.forEach(function (a, i) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (history.replaceState) history.replaceState(null, '', '#' + ids[i]);
+        mostra(ids[i], true);
       });
-    }, { rootMargin: '-45% 0px -50% 0px' });
-    Object.keys(map).forEach(function (id) { io.observe(d.getElementById(id)); });
+    });
+    window.addEventListener('hashchange', function () { mostra(location.hash.replace('#', ''), true); });
+    mostra((location.hash || '').replace('#', ''), false);
   }
 
   /* ---------- Consenso cookie e mappa ---------- */

@@ -59,7 +59,7 @@ Non introdurre framework, bundler, npm, React o un generatore statico senza rich
 | Superficie chiara | `#EAE8E3` |
 | Testo su scuro | `#F4F6F8` · secondario `#A7AFBA` |
 | Testo su chiaro | `#16191F` · secondario `#5A616B` |
-| Accento arancione | `#FF7A18` (pressed `#E0620A`) |
+| Accento arancione | `#F7931D` (pressed `#E0820C`) |
 | Verde | `#22C55E` solo stati positivi |
 | Rosso | `#EF4444` solo errori |
 
