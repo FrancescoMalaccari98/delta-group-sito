@@ -62,10 +62,14 @@
     <a href="servizi.html#pneumatici"><span>Pneumatici</span><em aria-hidden="true">›</em></a>
     <a href="contatti.html"><span>Contatti</span><em aria-hidden="true">›</em></a>
   </nav>
-  <div class="drawer-plate">
-    <img src="assets/img/logo-delta.png" alt="Logo Delta Group" class="drawer-plate-logo">
-    <p class="drawer-plate-name">DELTA GROUP</p>
-    <p class="drawer-plate-sub">AUTOOFFICINA E CENTRO REVISIONI<br>CIVITANOVA MARCHE · MC</p>
+  <div class="drawer-foot">
+    <span class="drawer-brand">
+      <img class="drawer-brand-logo" src="assets/img/logo-delta.png" alt="">
+      <span class="drawer-brand-txt">
+        <b>DELTA GROUP</b>
+        <em>AUTOOFFICINA E CENTRO REVISIONI<br>CIVITANOVA MARCHE · MC</em>
+      </span>
+    </span>
     <p class="drawer-legal"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></p>
   </div>
 </div>
@@ -214,7 +218,13 @@
 }
 </script>
 
-<footer class="site-footer site-footer--min" aria-hidden="true"></footer>
+<footer class="site-footer site-footer--min">
+  <div class="wrap">
+    <div class="footer-legal footer-legal--min">
+      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></span>
+    </div>
+  </div>
+</footer>
 
 <nav class="actionbar" id="actionbar" aria-label="Azioni rapide">
   <a class="ab ab-primary" href="tel:+390733815450">
@@ -229,10 +239,12 @@
 </nav>
 
 <div class="cookie" id="cookie" hidden>
-  <p>Usiamo cookie tecnici. La mappa di Google viene caricata solo con il tuo consenso. <a href="cookie.html">Cookie Policy</a></p>
-  <div class="cookie-actions">
-    <button type="button" class="btn btn-primary btn-sm" id="cookieOk">Accetta</button>
-    <button type="button" class="btn btn-outline btn-sm" id="cookieNo">Solo necessari</button>
+  <div class="cookie-inner">
+    <p>Usiamo cookie tecnici. La mappa di Google viene caricata solo con il tuo consenso. <a href="cookie.html">Cookie Policy</a></p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-primary btn-sm" id="cookieOk">Accetta</button>
+      <button type="button" class="btn btn-outline btn-sm" id="cookieNo">Solo necessari</button>
+    </div>
   </div>
 </div>
 
