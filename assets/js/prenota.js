@@ -43,7 +43,7 @@
     toStep2: q('#toStep2'), step1Msg: q('#step1Msg'),
     recapServ: q('#recapServ'), recapWhen: q('#recapWhen'), backTo1: q('#backTo1'),
     form: q('#bkForm'), formMsg: q('#formMsg'), submit: q('#bkSubmit'),
-    okWhen: q('#okWhen'), okCode: q('#okCode'), okList: q('#okList'), okIcs: q('#okIcs'), okTitle: q('#okTitle'),
+    okWhen: q('#okWhen'), okList: q('#okList'), okTitle: q('#okTitle'),
     fieldKm: q('#fieldKm')
   };
 
@@ -335,7 +335,6 @@
     var dt = daIso(stato.data);
     el.okTitle.textContent = 'Ti aspettiamo ' + GIORNI_L[dt.getDay()];
     el.okWhen.textContent = API.servizi[stato.servizio].label + ' · ' + quandoTesto();
-    el.okCode.textContent = r.codice || '—';
     var righe = [
       ['Veicolo', payload.veicolo.modello + ' · ' + payload.veicolo.targa],
       ['Alimentazione', payload.veicolo.alimentazione],
@@ -348,32 +347,7 @@
     el.okList.innerHTML = righe.map(function (r2) {
       return '<div><dt>' + r2[0] + '</dt><dd>' + r2[1].replace(/</g, '&lt;') + '</dd></div>';
     }).join('');
-    el.okIcs.href = ics(r);
     vaiAlPasso(3);
-  }
-
-  function ics(r) {
-    var durata = API.servizi[stato.servizio].durata;
-    var p = stato.data.split('-'), o = stato.ora.split(':');
-    var inizio = new Date(+p[0], +p[1] - 1, +p[2], +o[0], +o[1]);
-    var fine = new Date(inizio.getTime() + durata * 60000);
-    function f(dt) {
-      return dt.getFullYear() + pad(dt.getMonth() + 1) + pad(dt.getDate()) + 'T' +
-        pad(dt.getHours()) + pad(dt.getMinutes()) + '00';
-    }
-    var testo = [
-      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Delta Group//prenotazioni//IT',
-      'BEGIN:VEVENT',
-      'UID:' + (r.codice || Date.now()) + '@delta-group.it',
-      'DTSTAMP:' + f(new Date()),
-      'DTSTART:' + f(inizio),
-      'DTEND:' + f(fine),
-      'SUMMARY:' + API.servizi[stato.servizio].label + ' — Delta Group',
-      'LOCATION:Via Martiri di Belfiore 161, 62012 Civitanova Marche MC',
-      'DESCRIPTION:Codice prenotazione ' + (r.codice || '') + '. Tel 0733 815450.',
-      'END:VEVENT', 'END:VCALENDAR'
-    ].join('\r\n');
-    return 'data:text/calendar;charset=utf-8,' + encodeURIComponent(testo);
   }
 
   /* ---------- avvio ---------- */
