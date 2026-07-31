@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prenota revisione o tagliando — Delta Group S.r.l.</title>
+<meta name="description" content="Prenota online la revisione o il tagliando presso Delta Group S.r.l., Civitanova Marche. Scegli giorno e ora, ricevi subito il codice di prenotazione.">
+<meta name="theme-color" content="#0D0F12">
+<meta name="robots" content="index,follow">
+<meta property="og:title" content="Prenota revisione o tagliando — Delta Group S.r.l.">
+<meta property="og:description" content="Scegli giorno e ora, inserisci i dati del veicolo e ricevi subito la conferma.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="prenota">
+<a class="skip" href="#main">Salta al contenuto</a>
+
+<header class="site-header" id="siteHeader">
+  <div class="wrap header-inner">
+    <a class="logo" href="index.html" aria-label="Delta Group, home">
+      <img class="logo-img" src="assets/img/logo-delta.png" alt="">
+      <span class="logo-text">DELTA<span>&nbsp;GROUP</span></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Navigazione principale">
+      <a href="index.html">Home</a>
+      <a href="servizi.html">Servizi</a>
+      <a href="contatti.html">Contatti</a>
+      <span class="nav-sep"></span>
+      <a class="nav-tel" href="tel:+390733815450">0733 815450</a>
+      <a class="btn btn-primary btn-sm" href="prenota.html">Prenota online</a>
+    </nav>
+    <div class="header-actions">
+      <a class="icon-btn" href="tel:+390733815450" aria-label="Chiama Delta Group">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 18.6h2.8"/></svg>
+      </a>
+      <button class="icon-btn" type="button" id="menuOpen" aria-label="Apri il menu" aria-expanded="false" aria-controls="drawer">
+        <span class="burger" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer-top">
+    <span class="logo">
+      <img class="logo-img" src="assets/img/logo-delta.png" alt="">
+      <span class="logo-text">DELTA<span>&nbsp;GROUP</span></span>
+    </span>
+    <button class="icon-btn" type="button" id="menuClose" aria-label="Chiudi il menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </button>
+  </div>
+  <nav class="drawer-nav" aria-label="Menu">
+    <a href="index.html"><span>Home</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html"><span>Servizi</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#gpl"><span>GPL e metano</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#revisioni"><span>Revisioni</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#officina"><span>Officina</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#pneumatici"><span>Pneumatici</span><em aria-hidden="true">›</em></a>
+    <a href="contatti.html"><span>Contatti</span><em aria-hidden="true">›</em></a>
+  </nav>
+  <div class="drawer-foot">
+    <span class="drawer-brand">
+      <img class="drawer-brand-logo" src="assets/img/logo-delta.png" alt="">
+      <span class="drawer-brand-txt">
+        <b>DELTA GROUP</b>
+        <em>AUTOOFFICINA E CENTRO REVISIONI<br>CIVITANOVA MARCHE · MC</em>
+      </span>
+    </span>
+    <p class="drawer-legal"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></p>
+  </div>
+</div>
+
+<main id="main">
+
+  <section class="page-head page-head--short">
+    <div class="wrap">
+      <p class="eyebrow"><span class="rule"></span>PRENOTAZIONE ONLINE</p>
+      <h1>Prenota revisione<br>o tagliando</h1>
+      <p class="lede">Scegli il giorno e l'orario disponibile, inserisci i dati del veicolo. Ricevi subito il riepilogo con il codice di prenotazione.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--warm bk" id="bk">
+    <div class="wrap narrow">
+
+      <ol class="steps" id="steps">
+        <li class="step is-current"><b>1</b><span>Giorno e ora</span></li>
+        <li class="step"><b>2</b><span>Dati</span></li>
+        <li class="step"><b>3</b><span>Conferma</span></li>
+      </ol>
+
+      <!-- PASSO 1 — servizio, giorno, orario -->
+      <div class="bk-step" id="step1">
+        <div class="bk-card">
+          <p class="label bk-lab" id="servLab">SERVIZIO</p>
+          <div class="seg" role="radiogroup" aria-labelledby="servLab">
+            <button type="button" class="seg-opt is-on" data-serv="revisione" role="radio" aria-checked="true">
+              <b>Revisione</b><em>Auto e moto · circa 45 min</em>
+            </button>
+            <button type="button" class="seg-opt" data-serv="tagliando" role="radio" aria-checked="false">
+              <b>Tagliando / officina</b><em>Diagnosi e manutenzione · circa 1h 30</em>
+            </button>
+          </div>
+        </div>
+
+        <div class="bk-card bk-card--cal">
+          <div class="cal-head">
+            <button type="button" class="cal-nav" id="calPrev" aria-label="Mese precedente">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5 8 12l6.5 7"/></svg>
+            </button>
+            <p class="cal-title" id="calLabel">Caricamento…</p>
+            <button type="button" class="cal-nav" id="calNext" aria-label="Mese successivo">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 5 16 12l-6.5 7"/></svg>
+            </button>
+          </div>
+          <div class="cal-dow" aria-hidden="true"><span>LUN</span><span>MAR</span><span>MER</span><span>GIO</span><span>VEN</span><span>SAB</span><span>DOM</span></div>
+          <div class="cal-grid" id="days" role="group" aria-label="Giorni del mese"></div>
+          <p class="bk-hint"><span class="cal-key" aria-hidden="true"></span>Giorni con orari liberi. Domenica chiuso; lunedì–venerdì 8–12 e 14–19, sabato 8–12.</p>
+        </div>
+
+        <div class="bk-card" id="slotCard" hidden>
+          <p class="label bk-lab" id="slotLab">ORARI DISPONIBILI</p>
+          <div class="slots" id="slots" role="group" aria-labelledby="slotLab"></div>
+        </div>
+
+        <p class="form-msg is-ko" id="step1Msg" hidden></p>
+        <button class="btn btn-primary btn-block" type="button" id="toStep2" disabled>Continua</button>
+      </div>
+
+      <!-- PASSO 2 — dati veicolo e contatto -->
+      <div class="bk-step" id="step2" hidden>
+        <div class="bk-recap">
+          <span>
+            <b id="recapServ">Revisione</b>
+            <em id="recapWhen">—</em>
+          </span>
+          <button type="button" class="bk-edit" id="backTo1">Modifica</button>
+        </div>
+
+        <form class="form bk-form" id="bkForm" novalidate>
+          <p class="label bk-lab">VEICOLO</p>
+          <div class="form-2">
+            <div class="field">
+              <label for="tipo">Tipo di veicolo</label>
+              <select id="tipo" name="tipo">
+                <option value="auto">Auto</option>
+                <option value="moto">Moto o ciclomotore</option>
+                <option value="autocarro">Autocarro fino a 3,5 t</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="targa">Targa</label>
+              <input id="targa" name="targa" type="text" inputmode="text" autocapitalize="characters" placeholder="AB123CD" required>
+              <p class="err" data-err="targa" hidden>Inserisci la targa del veicolo.</p>
+            </div>
+            <div class="field">
+              <label for="modello">Marca e modello</label>
+              <input id="modello" name="modello" type="text" placeholder="Fiat Panda" required>
+              <p class="err" data-err="modello" hidden>Inserisci marca e modello.</p>
+            </div>
+            <div class="field">
+              <label for="anno">Anno di immatricolazione</label>
+              <input id="anno" name="anno" type="number" inputmode="numeric" min="1950" max="2030" placeholder="2016" required>
+              <p class="err" data-err="anno" hidden>Inserisci un anno valido.</p>
+            </div>
+            <div class="field">
+              <label for="alimentazione">Alimentazione</label>
+              <select id="alimentazione" name="alimentazione">
+                <option value="benzina">Benzina</option>
+                <option value="diesel">Diesel</option>
+                <option value="gpl">GPL</option>
+                <option value="metano">Metano</option>
+                <option value="ibrido">Ibrido</option>
+                <option value="elettrico">Elettrico</option>
+              </select>
+            </div>
+            <div class="field" id="fieldKm">
+              <label for="km">Chilometri attuali <span class="opt">(facoltativo)</span></label>
+              <input id="km" name="km" type="number" inputmode="numeric" min="0" placeholder="128000">
+            </div>
+          </div>
+
+          <p class="label bk-lab">CONTATTI</p>
+          <div class="form-2">
+            <div class="field">
+              <label for="nome">Nome e cognome</label>
+              <input id="nome" name="nome" type="text" autocomplete="name" required>
+              <p class="err" data-err="nome" hidden>Inserisci il tuo nome.</p>
+            </div>
+            <div class="field">
+              <label for="tel">Telefono</label>
+              <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" placeholder="348 1234567" required>
+              <p class="err" data-err="tel" hidden>Inserisci un numero di telefono valido.</p>
+            </div>
+            <div class="field field--full">
+              <label for="email">E-mail</label>
+              <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="nome@esempio.it" required>
+              <p class="err" data-err="email" hidden>Inserisci un indirizzo e-mail valido.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="note">Note per l'officina <span class="opt">(facoltativo)</span></label>
+            <textarea id="note" name="note" rows="3" placeholder="Es. rumore in frenata, scadenza bombole metano, richiesta preventivo."></textarea>
+          </div>
+
+          <label class="check" for="cortesia">
+            <input type="checkbox" id="cortesia" name="cortesia">
+            <span>Mi interessa l'auto di cortesia (su richiesta e secondo disponibilità)</span>
+          </label>
+
+          <label class="check" for="privacy">
+            <input type="checkbox" id="privacy" name="privacy" required>
+            <span>Ho letto la <a href="privacy.html">Privacy Policy</a> e acconsento al trattamento dei dati per gestire la prenotazione.</span>
+          </label>
+          <p class="err" data-err="privacy" hidden>Serve il consenso per procedere.</p>
+
+          <p class="form-msg is-ko" id="formMsg" hidden></p>
+          <button class="btn btn-primary btn-block" type="submit" id="bkSubmit">Conferma prenotazione</button>
+          <p class="form-note">Nessun pagamento online. Riceverai il riepilogo via e-mail; per modifiche o disdette chiamaci allo 0733 815450.</p>
+        </form>
+      </div>
+
+      <!-- PASSO 3 — conferma -->
+      <div class="bk-step" id="step3" hidden>
+        <div class="bk-ok">
+          <span class="badge"><span class="dot"></span>Prenotazione confermata</span>
+          <h2 id="okTitle">Ti aspettiamo</h2>
+          <p class="lede" id="okWhen">—</p>
+          <p class="bk-code">CODICE <b id="okCode">—</b></p>
+          <dl class="bk-list" id="okList"></dl>
+          <div class="bk-ok-actions">
+            <a class="btn btn-dark btn-sm" id="okIcs" href="#" download="prenotazione-delta-group.ics">Aggiungi al calendario</a>
+            <a class="btn btn-outline btn-sm" href="index.html">Torna alla home</a>
+          </div>
+          <p class="form-note">Conserva il codice: serve per qualsiasi modifica. Via Martiri di Belfiore 161, Civitanova Marche (MC).</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <span class="logo">
+          <img class="logo-img" src="assets/img/logo-delta.png" alt="">
+          <span class="logo-text">DELTA<span>&nbsp;GROUP</span></span>
+        </span>
+        <p class="footer-addr">Delta Group S.r.l.<br>Via Martiri di Belfiore 161<br>62012 Civitanova Marche (MC)<br>P.IVA 01580740437</p>
+      </div>
+      <div class="footer-col">
+        <p class="label">CONTATTI</p>
+        <a href="tel:+390733815450">0733 815450</a>
+        <a href="https://wa.me/393487619808">348 7619808</a>
+        <a href="mailto:info@delta-group.it">info@delta-group.it</a>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></span>
+    </div>
+  </div>
+</footer>
+
+<nav class="actionbar" id="actionbar" aria-label="Azioni rapide">
+  <a class="ab ab-primary" href="prenota.html">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.4"/><path d="M8 3.5v3M16 3.5v3M3.5 10h17"/></svg><span>Prenota</span>
+  </a>
+  <a class="ab" href="tel:+390733815450">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.2"/><path d="M10.6 18.6h2.8"/></svg><span>Chiama</span>
+  </a>
+  <a class="ab" href="https://wa.me/393487619808">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12.5a7.6 7.6 0 0 1-7.8 7.5 8.7 8.7 0 0 1-2.9-.5L5 21l1.3-3.6A7.3 7.3 0 0 1 4.4 12.5 7.6 7.6 0 0 1 12.2 5 7.6 7.6 0 0 1 20 12.5Z"/></svg><span>WhatsApp</span>
+  </a>
+</nav>
+
+<div class="cookie" id="cookie" hidden>
+  <div class="cookie-inner">
+    <p>Usiamo cookie tecnici. La mappa di Google viene caricata solo con il tuo consenso. <a href="cookie.html">Cookie Policy</a></p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-primary btn-sm" id="cookieOk">Accetta</button>
+      <button type="button" class="btn btn-outline btn-sm" id="cookieNo">Solo necessari</button>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/prenota-api.js" defer></script>
+<script src="assets/js/prenota.js" defer></script>
+</body>
+</html>

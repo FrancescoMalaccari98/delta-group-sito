@@ -79,6 +79,23 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .drawer-legal{display:flex;gap:22px;margin:0;padding-top:14px;border-top:1px solid #1F242C}
 .drawer-legal a{font:500 12px var(--f-mono);letter-spacing:.11em;color:var(--muted-d)}
 .drawer-legal a:hover{color:var(--accent)}
+/* schermi bassi: la placca si compatta così il menu sta tutto senza scorrere */
+@media (max-height:719px){
+  .drawer-nav a{min-height:46px;padding:2px 0}
+  .drawer-nav span{font-size:23px}
+  .drawer-foot{padding:14px var(--gutter) calc(12px + env(safe-area-inset-bottom));gap:11px}
+  .drawer-brand{gap:10px}
+  .drawer-brand-logo{width:40px;height:40px}
+  .drawer-brand-txt b{font-size:22px}
+  .drawer-brand-txt em{margin-top:6px;font-size:10px;line-height:1.35}
+  .drawer-legal{gap:18px;padding-top:12px}
+  .drawer-legal a{font-size:11px}
+}
+/* telefoni stretti: celle del calendario più larghe */
+@media (max-width:399.98px){
+  .bk-card--cal{padding:12px 6px}
+  .cal-grid,.cal-dow{gap:2px}
+}
 .site-footer--min{border-top:0;padding-top:0;padding-bottom:100px}
 .footer-legal--min{flex-direction:row;align-items:center;justify-content:space-between;gap:16px;margin-top:0;padding-top:14px;border-top:1px solid #1F242C}
 .footer-legal--min a:hover{color:var(--accent)}
@@ -546,4 +563,91 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 @media (min-width:1024px){
   .mark{width:22px;height:22px}
   .card .mark{width:26px;height:26px;margin-bottom:14px}
+}
+
+/* ---------- Prenotazione online ---------- */
+.steps{display:flex;align-items:center;gap:10px;list-style:none;margin:0 0 18px;padding:0}
+.step{display:flex;align-items:center;gap:8px;min-width:0;color:var(--faint-l)}
+.step b{width:26px;height:26px;flex:none;border-radius:50%;border:1px solid var(--border-l2);display:flex;align-items:center;justify-content:center;font:600 13px var(--f-body);background:var(--white)}
+.step span{font:500 12.5px var(--f-mono);letter-spacing:.09em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.step+.step::before{content:"";width:14px;height:1px;background:var(--border-l2);margin-right:2px;flex:none}
+.step.is-current{color:var(--text-l)}
+.step.is-current b{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.step.is-done b{background:var(--text-l);border-color:var(--text-l);color:var(--white)}
+.bk-card{background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l);padding:16px;margin-bottom:12px}
+.bk-lab{color:var(--faint-l);margin-bottom:10px}
+.seg{display:grid;gap:8px}
+.seg-opt{all:unset;box-sizing:border-box;display:block;padding:14px 15px;border:1px solid var(--border-l);border-radius:var(--r-m);background:var(--warm);cursor:pointer;min-height:56px}
+.seg-opt b{display:block;font-family:var(--f-title);font-weight:600;font-size:21px;line-height:1.1;color:var(--text-l)}
+.seg-opt em{display:block;margin-top:3px;font-style:normal;font-size:15px;color:var(--muted-l)}
+.seg-opt.is-on{background:var(--white);border-color:var(--accent);box-shadow:0 0 0 2px rgba(247,147,29,.22)}
+.cal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.cal-title{flex:1;text-align:center;font-family:var(--f-title);font-weight:600;font-size:19px;color:var(--text-l)}
+.cal-nav{all:unset;box-sizing:border-box;width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-l);border-radius:var(--r-s);color:var(--text-l);cursor:pointer;background:var(--warm)}
+.cal-nav svg{width:16px;height:16px}
+.cal-nav:disabled{opacity:.35;cursor:default}
+.bk-card--cal{padding:14px 10px}
+.cal-dow{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;margin-bottom:7px}
+.cal-dow span{text-align:center;font:500 9.5px var(--f-mono);letter-spacing:.02em;color:var(--faint-l)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.cal-blank{display:block}
+.cal-day{all:unset;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:48px;padding:5px 0;border:1px solid var(--border-l);border-radius:var(--r-s);background:var(--warm);cursor:pointer;text-align:center}
+.cal-day b{font-family:var(--f-title);font-weight:600;font-size:18px;line-height:1;color:var(--text-l)}
+.cal-day i{display:block;width:5px;height:5px;border-radius:50%;background:transparent}
+.cal-day i.has-free{background:var(--accent)}
+.cal-day.is-off{opacity:.36;cursor:default}
+.cal-day.is-load{opacity:.45}
+.cal-day.is-on{background:var(--text-l);border-color:var(--text-l)}
+.cal-day.is-on b{color:var(--white)}
+.cal-day.is-on i.has-free{background:var(--white)}
+.cal-key{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);margin-right:7px}
+.bk-hint{margin-top:12px;font-size:14px;line-height:1.45;color:var(--muted-l)}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(86px,1fr));gap:8px}
+.slot{all:unset;box-sizing:border-box;min-height:48px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-l);border-radius:var(--r-s);background:var(--warm);font-size:16.5px;font-weight:500;color:var(--text-l);cursor:pointer}
+.slot.is-on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.bk-recap{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-m);padding:14px 16px;margin-bottom:6px}
+.bk-recap b{display:block;font-family:var(--f-title);font-weight:600;font-size:20px;line-height:1.1;color:var(--text-l)}
+.bk-recap em{display:block;margin-top:2px;font-style:normal;font-size:15px;color:var(--muted-l)}
+.bk-edit{all:unset;box-sizing:border-box;flex:none;min-height:44px;display:flex;align-items:center;padding:0 4px;font-size:15px;font-weight:500;color:var(--text-l);border-bottom:1px solid #C9C4B9;cursor:pointer}
+.bk-edit:hover{color:var(--accent);border-color:var(--accent)}
+.bk-form .bk-lab{margin:8px 0 0}
+.form-2{display:grid;gap:16px}
+.opt{color:var(--faint-l);font-weight:400}
+.check{display:flex;align-items:flex-start;gap:11px;font-size:15.5px;line-height:1.45;color:var(--text-l);cursor:pointer}
+.check input{width:22px;height:22px;flex:none;margin:1px 0 0;accent-color:var(--accent)}
+.check a{border-bottom:1px solid #C9C4B9}
+.check a:hover{color:var(--accent);border-color:var(--accent)}
+.bk-ok{background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l);padding:20px 18px 22px}
+.bk-ok h2{font-size:34px;line-height:1.02;color:var(--text-l);margin:0 0 8px}
+.bk-ok .lede{color:var(--muted-l);margin-bottom:16px}
+.bk-code{display:inline-flex;align-items:center;gap:10px;padding:11px 14px;border:1px dashed var(--border-l2);border-radius:var(--r-s);font:500 12px var(--f-mono);letter-spacing:.13em;color:var(--muted-l);margin-bottom:18px}
+.bk-code b{font-size:19px;letter-spacing:.06em;color:var(--text-l)}
+.bk-list{margin:0 0 20px;padding:0;border-top:1px solid #EDEBE6}
+.bk-list>div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid #EDEBE6}
+.bk-list dt{font-size:15px;color:var(--muted-l)}
+.bk-list dd{margin:0;font-size:15.5px;font-weight:500;color:var(--text-l);text-align:right;overflow-wrap:anywhere}
+.bk-ok-actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.bk .btn:disabled{background:#E5E1D9;border-color:transparent;color:#A49E93}
+.bk .form-msg.is-ko{margin-bottom:12px}
+@media (min-width:768px){
+  .step span{font-size:13px}
+  .seg{grid-template-columns:1fr 1fr}
+  .bk-card{padding:20px}
+  .form-2{grid-template-columns:1fr 1fr;gap:18px}
+  .field--full{grid-column:1/-1}
+  .bk-card--cal{padding:20px}
+  .cal-dow{gap:6px;margin-bottom:9px}
+  .cal-dow span{font-size:10.5px;letter-spacing:.08em}
+  .cal-grid{gap:6px}
+  .cal-day{min-height:58px;border-radius:var(--r-m)}
+  .cal-day b{font-size:21px}
+  .bk-ok{padding:26px 26px 28px}
+}
+@media (min-width:1024px){
+  .steps{margin-bottom:24px}
+  .cal-title{font-size:21px}
+  .cal-day{min-height:62px}
+  .cal-day b{font-size:22px}
+  .slots{grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+  .bk-ok h2{font-size:40px}
 }
