@@ -13,7 +13,7 @@
   --f-title:'Barlow Semi Condensed','Barlow',system-ui,sans-serif;
   --f-body:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
   --f-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
-  --gutter:20px; --header-h:58px; --r-s:10px; --r-m:13px; --r-l:15px;
+  --gutter:20px; --header-h:96px; --r-s:10px; --r-m:13px; --r-l:15px;
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -33,8 +33,8 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .eyebrow{display:flex;align-items:flex-start;gap:9px;font:500 12.5px/1.45 var(--f-mono);letter-spacing:.12em;color:var(--muted-d);margin:0 0 14px}
 .eyebrow--dark{color:#6B7280}
 .rule{width:18px;height:2px;background:var(--accent);margin-top:7px;flex:none}
-.mark{width:20px;height:20px;flex:none;display:inline-block;background:url("../img/logo-delta.svg") center/contain no-repeat}
-.card .mark{display:block;width:22px;height:22px;margin-bottom:8px}
+.mark{width:30px;height:30px;flex:none;display:inline-block;background:url("../img/logo-delta.svg") center/contain no-repeat}
+.card .mark{display:block;width:32px;height:32px;margin-bottom:8px}
 .tri{width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:10px solid var(--accent);flex:none;display:inline-block}
 .lede{font-size:17px;line-height:1.55;color:var(--muted-d);text-wrap:pretty}
 .sec--warm .lede,.sec--light .lede{color:var(--muted-l)}
@@ -47,8 +47,8 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;position:relative}
 .logo{display:flex;align-items:center;gap:9px}
 .logo-mark{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--accent)}
-.logo-img{width:42px;height:42px;flex:none;display:block}
-.logo-text{font-family:var(--f-title);font-weight:700;font-size:19px;letter-spacing:.07em;color:var(--text-d);line-height:1}
+.logo-img{width:84px;height:84px;flex:none;display:block}
+.logo-text{font-family:var(--f-title);font-weight:700;font-size:24px;letter-spacing:.07em;color:var(--text-d);line-height:1}
 .logo-text span{color:var(--muted-d);font-weight:500}
 .header-actions{display:flex;align-items:center;gap:6px;margin-right:-10px}
 .icon-btn{width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:var(--r-s);border:1px solid rgba(244,246,248,.16);background:none;color:var(--text-d);cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -143,7 +143,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 
 /* ---------- Credenziali ---------- */
 .creds{background:var(--surface-d);border-top:1px solid var(--border-d);border-bottom:1px solid var(--border-d)}
-.creds-grid p{display:flex;align-items:center;gap:12px;min-height:54px;font-size:16.5px;font-weight:500;border-bottom:1px solid #21262E}
+.creds-grid p{display:flex;align-items:center;gap:12px;min-height:62px;font-size:16.5px;font-weight:500;border-bottom:1px solid #21262E}
 .creds-grid p:last-child{border-bottom:0}
 
 /* ---------- Sezioni ---------- */
@@ -404,7 +404,7 @@ body.is-typing .cookie{bottom:0}
    DESKTOP — da 1024px
    ========================================================= */
 @media (min-width:1024px){
-  :root{--gutter:48px;--header-h:68px}
+  :root{--gutter:48px;--header-h:116px}
   body{font-size:15px}
   .header-actions{display:none}
   .nav-desktop{display:flex;align-items:center;gap:34px}
@@ -415,7 +415,7 @@ body.is-typing .cookie{bottom:0}
   .nav-desktop>a.is-current{color:var(--text-d);border-bottom:2px solid var(--accent)}
   .nav-sep{width:1px;height:26px;background:var(--border-d)}
   .nav-tel{font-size:16px;font-weight:600;color:var(--text-d)!important}
-  .logo-text{font-size:23px}
+  .logo-text{font-size:30px}
   .logo-mark{border-left-width:9px;border-right-width:9px;border-bottom-width:15px}
   .drawer{display:none!important}
   .actionbar{display:none}
@@ -525,7 +525,7 @@ body.is-typing .cookie{bottom:0}
 }
 
 /* Logo desktop leggermente piu grande */
-@media (min-width:1024px){.logo-img{width:52px;height:52px}}
+@media (min-width:1024px){.logo-img{width:104px;height:104px}}
 
 /* ---------- Contatti: canali, sede e orari ---------- */
 .channels{background:var(--carbone);border-top:1px solid var(--border-d);border-bottom:1px solid var(--border-d)}
@@ -688,3 +688,11 @@ html.no-splash .splash{display:none}
 /* Home: chiude sulla gallery, spazio per la barra azioni */
 body[data-page="home"] main{padding-bottom:104px}
 @media (min-width:1024px){body[data-page="home"] main{padding-bottom:48px}}
+
+/* Logo: grande nell'header, misure proprie in menu e footer */
+.drawer-top{height:64px}
+.drawer-top .logo-img{width:42px;height:42px}
+.drawer-top .logo-text{font-size:19px}
+.site-footer .logo-img{width:56px;height:56px}
+.site-footer .logo-text{font-size:22px}
+@media (min-width:1024px){.site-footer .logo-img{width:64px;height:64px}.site-footer .logo-text{font-size:26px}}
