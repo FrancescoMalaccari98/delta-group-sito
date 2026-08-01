@@ -277,13 +277,13 @@
       }
     }
     sp.classList.add('is-out');
-    t2 = setTimeout(finish, 700);
+    t2 = setTimeout(finish, 760);
   }
 
   window.scrollTo(0, 0);
-  t1 = setTimeout(fly, 1250);
+  t1 = setTimeout(fly, 1720);
   sp.addEventListener('click', fly);
   sp.addEventListener('touchstart', fly, { passive: true });
   window.addEventListener('keydown', fly);
-  setTimeout(finish, 3200);
+  setTimeout(finish, 3800);
 })();
