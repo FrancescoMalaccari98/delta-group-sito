@@ -47,7 +47,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;position:relative}
 .logo{display:flex;align-items:center;gap:9px}
 .logo-mark{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--accent)}
-.logo-img{width:34px;height:34px;flex:none;display:block}
+.logo-img{width:42px;height:42px;flex:none;display:block}
 .logo-text{font-family:var(--f-title);font-weight:700;font-size:19px;letter-spacing:.07em;color:var(--text-d);line-height:1}
 .logo-text span{color:var(--muted-d);font-weight:500}
 .header-actions{display:flex;align-items:center;gap:6px;margin-right:-10px}
@@ -525,7 +525,7 @@ body.is-typing .cookie{bottom:0}
 }
 
 /* Logo desktop leggermente piu grande */
-@media (min-width:1024px){.logo-img{width:42px;height:42px}}
+@media (min-width:1024px){.logo-img{width:52px;height:52px}}
 
 /* ---------- Contatti: canali, sede e orari ---------- */
 .channels{background:var(--carbone);border-top:1px solid var(--border-d);border-bottom:1px solid var(--border-d)}
@@ -684,3 +684,7 @@ html.no-splash .splash{display:none}
 .splash.is-out .splash-logo{transition:transform .7s cubic-bezier(.62,0,.24,1)}
 .splash.is-out .sp-p,.splash.is-out .sp-t{animation:none;opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.splash{display:none}}
+
+/* Home: chiude sulla gallery, spazio per la barra azioni */
+body[data-page="home"] main{padding-bottom:104px}
+@media (min-width:1024px){body[data-page="home"] main{padding-bottom:48px}}
