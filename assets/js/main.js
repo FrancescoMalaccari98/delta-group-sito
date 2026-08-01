@@ -242,3 +242,48 @@
     targets.forEach(function (el) { ro.observe(el); });
   }
 })();
+
+
+/* ---------- Splash d'ingresso: i 3 pezzi si uniscono, poi il logo vola nell'header ---------- */
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var sp = document.getElementById('splash');
+  if (!sp) return;
+  if (!root.classList.contains('splashing')) { sp.remove(); return; }
+
+  var logo = sp.querySelector('.splash-logo');
+  var target = document.querySelector('.site-header .logo-img');
+  var t1, t2, out = false, done = false;
+
+  function finish() {
+    if (done) return;
+    done = true;
+    clearTimeout(t2);
+    root.classList.remove('splashing');
+    if (sp.parentNode) sp.parentNode.removeChild(sp);
+  }
+
+  function fly() {
+    if (out) return;
+    out = true;
+    clearTimeout(t1);
+    if (target) {
+      var a = logo.getBoundingClientRect(), b = target.getBoundingClientRect();
+      if (a.width && b.width) {
+        var dx = (b.left + b.width / 2) - (a.left + a.width / 2);
+        var dy = (b.top + b.height / 2) - (a.top + a.height / 2);
+        logo.style.transform = 'translate(' + dx + 'px,' + dy + 'px) scale(' + (b.width / a.width) + ')';
+      }
+    }
+    sp.classList.add('is-out');
+    t2 = setTimeout(finish, 700);
+  }
+
+  window.scrollTo(0, 0);
+  t1 = setTimeout(fly, 1250);
+  sp.addEventListener('click', fly);
+  sp.addEventListener('touchstart', fly, { passive: true });
+  window.addEventListener('keydown', fly);
+  setTimeout(finish, 3200);
+})();

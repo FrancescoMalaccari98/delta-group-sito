@@ -32,7 +32,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .eyebrow{display:flex;align-items:flex-start;gap:9px;font:500 12.5px/1.45 var(--f-mono);letter-spacing:.12em;color:var(--muted-d);margin:0 0 14px}
 .eyebrow--dark{color:#6B7280}
 .rule{width:18px;height:2px;background:var(--accent);margin-top:7px;flex:none}
-.mark{width:20px;height:20px;flex:none;display:inline-block;background:url("../img/logo-delta.png") center/contain no-repeat}
+.mark{width:20px;height:20px;flex:none;display:inline-block;background:url("../img/logo-delta.svg") center/contain no-repeat}
 .card .mark{display:block;width:22px;height:22px;margin-bottom:8px}
 .tri{width:0;height:0;border-left:5.5px solid transparent;border-right:5.5px solid transparent;border-bottom:10px solid var(--accent);flex:none;display:inline-block}
 .lede{font-size:17px;line-height:1.55;color:var(--muted-d);text-wrap:pretty}
@@ -659,3 +659,25 @@ body.is-typing .cookie{bottom:0}
   .bk-ok h2{font-size:40px}
   .bk-ok-logo{width:220px;height:220px}
 }
+
+
+/* ---------- Splash d'ingresso (solo home) ---------- */
+html.splashing,html.splashing body{overflow:hidden}
+html.splashing .site-header .logo-img{opacity:0}
+.site-header .logo-img{transition:opacity .25s ease .05s}
+html.no-splash .splash{display:none}
+.splash{position:fixed;inset:0;z-index:200;display:grid;place-items:center;background-color:#0D0F12}
+.splash-logo{width:min(62vw,320px);height:auto;overflow:visible;will-change:transform}
+.sp-p{opacity:0;animation:spIn .66s cubic-bezier(.18,.86,.28,1.02) both}
+.sp-l{animation-name:spInL}
+.sp-r{animation-name:spInR;animation-delay:.07s}
+.sp-b{animation-name:spInB;animation-delay:.14s}
+.sp-t{opacity:0;transform-box:fill-box;transform-origin:center;animation:spText .38s cubic-bezier(.2,.7,.3,1) .62s both}
+@keyframes spInL{from{opacity:0;transform:translate(-78px,26px)}to{opacity:1;transform:none}}
+@keyframes spInR{from{opacity:0;transform:translate(78px,26px)}to{opacity:1;transform:none}}
+@keyframes spInB{from{opacity:0;transform:translate(0,86px)}to{opacity:1;transform:none}}
+@keyframes spText{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+.splash.is-out{background-color:rgba(13,15,18,0);transition:background-color .46s ease .12s}
+.splash.is-out .splash-logo{transition:transform .62s cubic-bezier(.62,0,.24,1)}
+.splash.is-out .sp-p,.splash.is-out .sp-t{animation:none;opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.splash{display:none}}
