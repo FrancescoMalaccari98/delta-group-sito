@@ -91,3 +91,13 @@ Per provare la versione mobile dal PC: in Chrome premi F12 → icona telefono �
 - Spaziature verticali delle sezioni dimezzate su mobile, tablet e desktop.
 - Privacy e Cookie Policy: nel menu di navigazione mobile (targa in basso) e nella fascia legale in fondo a ogni pagina.
 - Pagina Contatti: recapiti in fascia scura a tutta larghezza (`.channels`), sede e orari tipografici con evidenza del giorno corrente (`.hour-row` + chip OGGI), mappa più grande. Rimossa la vecchia `.info-card`.
+
+## Aggiornamento — agosto 2026
+
+- **Home:** la galleria chiude la pagina a filo schermo. Le didascalie restano vicine al bordo inferiore
+  su desktop e appena sopra la barra azioni su mobile (`--ab-h` misurata in `main.js`).
+- **Footer:** da 2 a 4 colonne su desktop (marchio e sede · pagine · orari · contatti + "Come arrivare"),
+  2×2 su tablet, colonna "Pagine" nascosta su mobile perché già nel menu. Fascia legale con copyright a sinistra.
+- **Prenota:** alla conferma compare un velo a schermo pieno (`.loader` in `prenota.html`) con il marchio
+  che ruota fino alla risposta del server; visibile almeno 700 ms, scroll bloccato via `html.is-loading`.
+- **Contatti:** gli orari non vanno più a capo a metà (`.hour-row .val{white-space:nowrap}`).

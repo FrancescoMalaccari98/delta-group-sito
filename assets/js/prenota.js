@@ -268,6 +268,23 @@
     return ok;
   }
 
+  /* ---------- velo di caricamento ---------- */
+  var veloEl = q('#loader'), veloDa = 0;
+  function veloApri() {
+    veloDa = Date.now();
+    if (!veloEl) return;
+    veloEl.hidden = false;
+    d.documentElement.classList.add('is-loading');
+  }
+  /* resta visibile almeno 700 ms: nessun lampo se la risposta è immediata */
+  function veloChiudi(poi) {
+    var resta = Math.max(0, 700 - (Date.now() - veloDa));
+    setTimeout(function () {
+      if (veloEl) { veloEl.hidden = true; d.documentElement.classList.remove('is-loading'); }
+      poi();
+    }, resta);
+  }
+
   /* ---------- invio ---------- */
   el.form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -308,25 +325,30 @@
     };
     el.submit.disabled = true;
     el.submit.textContent = 'Invio in corso…';
+    veloApri();
     API.crea(payload).then(function (r) {
-      el.submit.disabled = false;
-      el.submit.textContent = 'Conferma prenotazione';
-      if (r && r.ok) { mostraConferma(r, payload); return; }
-      if (r && r.errore === 'slot_occupato') {
-        el.step1Msg.hidden = false;
-        el.step1Msg.textContent = 'Quell\'orario è stato appena prenotato da qualcun altro. Scegline un altro.';
-        stato.slotId = null; stato.ora = null;
-        caricaMese(true);
-        vaiAlPasso(1);
-        return;
-      }
-      el.formMsg.hidden = false;
-      el.formMsg.textContent = (r && r.messaggio) || 'Non è stato possibile confermare la prenotazione. Chiamaci allo 0733 815450.';
+      veloChiudi(function () {
+        el.submit.disabled = false;
+        el.submit.textContent = 'Conferma prenotazione';
+        if (r && r.ok) { mostraConferma(r, payload); return; }
+        if (r && r.errore === 'slot_occupato') {
+          el.step1Msg.hidden = false;
+          el.step1Msg.textContent = 'Quell\'orario è stato appena prenotato da qualcun altro. Scegline un altro.';
+          stato.slotId = null; stato.ora = null;
+          caricaMese(true);
+          vaiAlPasso(1);
+          return;
+        }
+        el.formMsg.hidden = false;
+        el.formMsg.textContent = (r && r.messaggio) || 'Non è stato possibile confermare la prenotazione. Chiamaci allo 0733 815450.';
+      });
     }).catch(function () {
-      el.submit.disabled = false;
-      el.submit.textContent = 'Conferma prenotazione';
-      el.formMsg.hidden = false;
-      el.formMsg.textContent = 'Connessione non riuscita. Riprova o chiamaci allo 0733 815450.';
+      veloChiudi(function () {
+        el.submit.disabled = false;
+        el.submit.textContent = 'Conferma prenotazione';
+        el.formMsg.hidden = false;
+        el.formMsg.textContent = 'Connessione non riuscita. Riprova o chiamaci allo 0733 815450.';
+      });
     });
   });
 
