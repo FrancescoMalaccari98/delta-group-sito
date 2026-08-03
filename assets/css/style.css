@@ -364,14 +364,17 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .cookie a{color:var(--text-d);border-bottom:1px solid rgba(244,246,248,.3)}
 .cookie-actions{display:flex;gap:8px}
 .cookie-actions .btn{flex:1}
-/* la fascia cookie resta appoggiata alla barra azioni, senza animazioni di posizione */
-@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:var(--ab-h)}}
+/* la fascia cookie resta appoggiata alla barra azioni, senza animazioni di posizione.
+   Quando sta sopra la barra non deve avere il proprio safe-area in basso: su iOS quel
+   valore passa da 0 a ~34px quando la toolbar del browser si ritira durante lo scroll,
+   e il vuoto sotto ai pulsanti Accetta / Solo necessari cresceva di conseguenza. */
+@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:var(--ab-h);padding-bottom:16px}}
 /* Mobile: sulla pagina servizi la fascia recapiti non serve, chiude la sezione aperta */
 @media (max-width:767.98px){body[data-page="servizi"] .channels{display:none}}
 body.has-cookie .actionbar{transform:none;opacity:1}
 /* mentre si compila un campo (tastiera aperta) la barra azioni si ritira */
 body.is-typing .actionbar{transform:translateY(110%);opacity:0;pointer-events:none}
-body.is-typing .cookie{bottom:0}
+body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
 
 /* ---------- Legali ---------- */
 .legal{color:var(--text-l)}
