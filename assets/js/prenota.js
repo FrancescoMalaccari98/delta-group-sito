@@ -276,9 +276,9 @@
     veloEl.hidden = false;
     d.documentElement.classList.add('is-loading');
   }
-  /* resta visibile almeno 700 ms: nessun lampo se la risposta è immediata */
+  /* resta visibile almeno 4,7 s: tempo per leggere l'avviso e vedere il marchio girare */
   function veloChiudi(poi) {
-    var resta = Math.max(0, 700 - (Date.now() - veloDa));
+    var resta = Math.max(0, 4700 - (Date.now() - veloDa));
     setTimeout(function () {
       if (veloEl) { veloEl.hidden = true; d.documentElement.classList.remove('is-loading'); }
       poi();
