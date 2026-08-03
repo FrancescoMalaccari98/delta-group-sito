@@ -555,6 +555,8 @@ body.is-typing .cookie{bottom:0}
 .channel:first-child{border-top:0}
 .channel:active{background:rgba(247,147,29,.06)}
 .channel-lab{display:block;font:500 12px var(--f-mono);letter-spacing:.13em;color:#8A919B;margin-bottom:5px}
+.lab-more{display:none}
+@media (min-width:768px){.lab-more{display:inline}}
 .channel-val{display:block;font-family:var(--f-title);font-weight:600;font-size:29px;line-height:1.05;color:var(--text-d)}
 .channel-val--mail{font-size:26px}
 .channel em{color:var(--accent);font-style:normal;font-size:18px;line-height:1;margin-bottom:4px}
@@ -565,7 +567,7 @@ body.is-typing .cookie{bottom:0}
   .channel:nth-child(1),.channel:nth-child(2){border-top:0}
   .channel:nth-child(2){border-left:1px solid var(--border-d);padding-left:14px}
   .channel:nth-child(3){grid-column:1 / -1}
-  .channel-lab{font-size:10.5px;letter-spacing:.1em;margin-bottom:4px}
+  .channel-lab{font-size:11px;letter-spacing:.1em;margin-bottom:4px;white-space:nowrap}
   .channel-val{font-size:21px}
   .channel-val--mail{font-size:20px}
   .channel em{font-size:15px;margin-bottom:3px}
