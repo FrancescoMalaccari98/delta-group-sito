@@ -14,6 +14,8 @@
   --f-body:Inter,system-ui,-apple-system,Segoe UI,sans-serif;
   --f-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
   --gutter:20px; --header-h:58px; --r-s:10px; --r-m:13px; --r-l:15px;
+  /* altezza della barra azioni: fissa, non misurata, così nulla si muove durante lo scroll */
+  --ab-h:calc(84px + env(safe-area-inset-bottom));
 }
 
 *,*::before,*::after{box-sizing:border-box}
@@ -362,9 +364,10 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .cookie a{color:var(--text-d);border-bottom:1px solid rgba(244,246,248,.3)}
 .cookie-actions{display:flex;gap:8px}
 .cookie-actions .btn{flex:1}
-.cookie{transition:bottom .28s cubic-bezier(.22,.7,.3,1)}
-/* la fascia cookie resta staccata dalla barra azioni di una misura fissa */
-@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:calc(var(--ab-h,84px) + 10px)}}
+/* la fascia cookie resta appoggiata alla barra azioni, senza animazioni di posizione */
+@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:var(--ab-h)}}
+/* Mobile: sulla pagina servizi la fascia recapiti non serve, chiude la sezione aperta */
+@media (max-width:767.98px){body[data-page="servizi"] .channels{display:none}}
 body.has-cookie .actionbar{transform:none;opacity:1}
 /* mentre si compila un campo (tastiera aperta) la barra azioni si ritira */
 body.is-typing .actionbar{transform:translateY(110%);opacity:0;pointer-events:none}
@@ -723,7 +726,7 @@ html.no-splash .splash{display:none}
 @media (prefers-reduced-motion:reduce){.splash{display:none}}
 
 /* Home e Servizi: chiudono senza footer, spazio per la barra azioni */
-body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:calc(var(--ab-h,86px) + 12px)}
+body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:calc(var(--ab-h) + 12px)}
 body[data-page="home"] .sec--flush{padding-bottom:0}
 body[data-page="home"] .gallery{padding-bottom:2px}
 @media (min-width:1024px){body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:20px}}

@@ -19,7 +19,6 @@
       var show = y > barFrom || d.body.classList.contains('has-cookie');
       bar.classList.toggle('is-visible', show);
       d.body.classList.toggle('has-actionbar', show);
-      if (show) misuraBarra();
     }
   }
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -29,14 +28,8 @@
   });
   onScroll();
 
-  function misuraBarra() {
-    if (!bar) return;
-    var hh = bar.offsetHeight;   /* 0 da desktop: la barra è display:none */
-    /* si scrive una sola misura valida: così la fascia cookie non si sposta più */
-    if (hh > 0) d.documentElement.style.setProperty('--ab-h', hh + 'px');
-  }
-  window.addEventListener('load', misuraBarra);
-  window.addEventListener('resize', misuraBarra);
+  /* L'altezza della barra azioni è fissata in CSS (--ab-h): niente misure a runtime,
+     così la fascia cookie non si sposta durante lo scroll. */
 
   /* Campi in compilazione: la barra azioni non copre la tastiera */
   var timerDigita = null;
@@ -180,7 +173,7 @@
   else if (banner) {
     banner.hidden = false;
     d.body.classList.add('has-cookie');
-    if (bar) { bar.classList.add('is-visible'); d.body.classList.add('has-actionbar'); misuraBarra(); }
+    if (bar) { bar.classList.add('is-visible'); d.body.classList.add('has-actionbar'); }
   }
   function salva(v) { try { localStorage.setItem(KEY, v); } catch (e) {} if (banner) banner.hidden = true; d.body.classList.remove('has-cookie'); onScroll(); }
   var ok = q('#cookieOk'), no = q('#cookieNo');
