@@ -560,17 +560,14 @@ body.is-typing .cookie{bottom:0}
 .channel-val{display:block;font-family:var(--f-title);font-weight:600;font-size:29px;line-height:1.05;color:var(--text-d)}
 .channel-val--mail{font-size:26px}
 .channel em{color:var(--accent);font-style:normal;font-size:18px;line-height:1;margin-bottom:4px}
-/* Mobile: due recapiti affiancati e l'e-mail a tutta larghezza, per accorciare la fascia */
+/* Mobile: tre caselle sulla stessa riga, chiudono la pagina dei servizi */
 @media (max-width:767.98px){
-  .channels-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:14px}
-  .channel{padding:13px 0 13px;gap:8px}
-  .channel:nth-child(1),.channel:nth-child(2){border-top:0}
-  .channel:nth-child(2){border-left:1px solid var(--border-d);padding-left:14px}
-  .channel:nth-child(3){grid-column:1 / -1}
-  .channel-lab{font-size:11px;letter-spacing:.1em;margin-bottom:4px;white-space:nowrap}
-  .channel-val{font-size:21px}
-  .channel-val--mail{font-size:20px}
-  .channel em{font-size:15px;margin-bottom:3px}
+  .channels-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .channel{flex-direction:row;align-items:center;justify-content:center;gap:7px;padding:18px 4px;border-top:0;text-align:center}
+  .channel+.channel{border-left:1px solid var(--border-d)}
+  .channel-lab{font-size:10.5px;letter-spacing:.07em;margin-bottom:0;color:var(--muted-d);white-space:nowrap}
+  .channel-val{display:none}
+  .channel em{font-size:16px;line-height:1;margin-bottom:0}
 }
 .sede-block{margin-bottom:22px}
 .sede{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
