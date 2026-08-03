@@ -399,8 +399,13 @@ body.is-typing .cookie{bottom:0}
   .why-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
   .gallery{display:grid;grid-template-columns:1fr 1fr 1fr;overflow:visible;padding:0 var(--gutter)}
   .gallery figure{width:auto}
-  .footer-grid{grid-template-columns:1fr 1fr;gap:28px 36px}
+  .footer-grid{grid-template-columns:1fr 1fr;gap:28px 36px;align-items:start}
   .footer-col--nav{display:block}
+  /* riga d'intestazione condivisa: marchio ed etichette partono dalla stessa linea */
+  .footer-brand .logo{display:flex;align-items:center;min-height:52px}
+  .footer-col .label{display:flex;align-items:center;min-height:52px;margin-bottom:14px}
+  .footer-addr{margin-top:14px}
+  .footer-hours:first-of-type,.footer-col .label+.footer-hours{padding-top:0}
   .contact-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:32px;align-items:start}
   .contact-grid>div+div{margin-top:0}
   .map{height:340px}
@@ -525,7 +530,9 @@ body.is-typing .cookie{bottom:0}
   .h2-s{font-size:37px}
   .footer-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,.62fr) minmax(0,.9fr) minmax(0,.9fr);gap:44px;padding-bottom:34px;border-bottom:1px solid var(--border-d)}
   .footer-col--nav{display:block}
-  .footer-hours{font-size:15px;padding:7px 0}
+  .footer-hours{font-size:16px;padding:7px 0 8px}
+  .footer-col .label+.footer-hours{padding-top:0}
+  .footer-col a{line-height:1.75}
   .footer-addr{font-size:16px;line-height:1.7}
   .footer-col a{font-size:16px}
   .footer-legal{flex-direction:row;justify-content:space-between;align-items:center;border-top:0;margin-top:20px;padding-top:0}
