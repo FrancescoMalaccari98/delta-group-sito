@@ -32,8 +32,11 @@
   function misuraBarra() {
     if (!bar) return;
     var hh = bar.offsetHeight;   /* 0 da desktop: la barra è display:none */
-    d.documentElement.style.setProperty('--ab-h', hh + 'px');
+    /* si scrive una sola misura valida: così la fascia cookie non si sposta più */
+    if (hh > 0) d.documentElement.style.setProperty('--ab-h', hh + 'px');
   }
+  window.addEventListener('load', misuraBarra);
+  window.addEventListener('resize', misuraBarra);
 
   /* Campi in compilazione: la barra azioni non copre la tastiera */
   var timerDigita = null;
