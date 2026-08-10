@@ -373,9 +373,12 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
    Sulla prenotazione, allo stesso modo, il footer viene rimosso: si chiude sul riepilogo. */
 @media (max-width:767.98px){
   body[data-page="servizi"] .channels{display:none}
-  body[data-page="prenota"] .site-footer{display:none}
-  body[data-page="prenota"] main{padding-bottom:0}
-  body[data-page="prenota"] main>.sec:last-child{padding-bottom:calc(var(--ab-h) + 14px)}
+  body[data-page="prenota"] .site-footer,
+  body[data-page="contatti"] .site-footer{display:none}
+  body[data-page="prenota"] main,
+  body[data-page="contatti"] main{padding-bottom:0}
+  body[data-page="prenota"] main>.sec:last-child,
+  body[data-page="contatti"] main>.sec:last-child{padding-bottom:calc(var(--ab-h) + 14px)}
 }
 body.has-cookie .actionbar{transform:none;opacity:1}
 /* mentre si compila un campo (tastiera aperta) la barra azioni si ritira */
