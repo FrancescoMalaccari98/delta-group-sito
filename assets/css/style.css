@@ -6,7 +6,7 @@
   --carbone:#0D0F12; --surface-d:#16191F; --surface-d2:#1A1F26; --border-d:#282D35; --border-d2:#3A414B;
   --text-d:#F4F6F8; --muted-d:#A7AFBA; --faint-d:#7E8794;
   --warm:#F4F3F0; --light:#EAE8E3; --white:#FFFFFF; --border-l:#E2DFD8; --border-l2:#DCD8D1;
-  --text-l:#16191F; --muted-l:#5A616B; --faint-l:#6E747C;
+  --text-l:#16191F; --muted-l:#5A616B; --faint-l:#5F656D;
   --accent:#F7931D; --accent-press:#E0820C; --accent-ink:#0D0F12;
   --cta:#0072BC; --cta-press:#00609F; --cta-ink:#FFFFFF;
   --green:#22C55E; --green-ink:#14532D; --red:#EF4444;
@@ -101,9 +101,11 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 24px;border:1px solid transparent;border-radius:var(--r-m);font-size:17px;font-weight:600;cursor:pointer;transition:background .15s ease,transform .12s ease,border-color .15s ease}
-.btn-primary{background:var(--cta);color:var(--cta-ink)}
-.btn-primary:hover{background:var(--cta-press)}
-.btn-primary:active{background:var(--cta-press);transform:scale(.985)}
+/* Azione primaria = arancio del marchio. Il blu resta ai link su fondo chiaro:
+   su carbone non arriverebbe al contrasto AA per il testo piccolo. */
+.btn-primary{background:var(--accent);color:var(--accent-ink)}
+.btn-primary:hover{background:var(--accent-press)}
+.btn-primary:active{background:var(--accent-press);transform:scale(.985)}
 .btn-outline{background:var(--surface-d);border-color:var(--border-d2);color:var(--text-d)}
 .btn-outline:active{background:#1E232B;transform:scale(.985)}
 .btn-dark{background:var(--surface-d);color:var(--text-d)}
@@ -115,7 +117,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .link-arrow span{color:var(--accent)}
 .link-arrow:hover{color:var(--accent)}
 .link-quiet{display:inline-flex;align-items:center;gap:8px;font-size:17px;font-weight:500;color:var(--text-l);border-bottom:1px solid #C9C4B9;padding-bottom:3px;align-self:flex-start}
-.link-quiet:hover{color:var(--accent);border-color:var(--accent)}
+.link-quiet:hover{color:var(--cta);border-color:var(--cta)}
 
 /* ---------- Placeholder foto ---------- */
 /* Foto temporanee da Pexels: appena arrivano gli scatti reali, sostituire gli
@@ -148,7 +150,8 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .sec{padding:24px 0 26px}
 .sec--dark{background:var(--carbone)}
 .sec--warm{background:var(--warm);color:var(--text-l)}
-.sec--light{background:var(--light);color:var(--text-l)}
+/* C2: un solo fondo chiaro. --light resta per gli incassi (mappa, placeholder, bordi). */
+.sec--light{background:var(--warm);color:var(--text-l)}
 .sec--flush{padding-bottom:12px}
 .sec h2{font-size:36px;line-height:1.03;margin-bottom:16px}
 .sec--warm h2,.sec--light h2{color:var(--text-l)}
@@ -226,9 +229,11 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .map--tall{height:250px}
 .map-ph{position:absolute;inset:0;background:none!important}
 .map-ph::after{color:#3A414B;font-size:11px}
-.map-consent{position:absolute;left:0;right:0;bottom:0;padding:14px;background:rgba(244,243,240,.95);border-top:1px solid var(--border-l);display:flex;flex-direction:column;gap:10px;align-items:flex-start}
-.map-consent p{font-size:16px;line-height:1.45;color:#3A414B}
+/* OpenStreetMap: nessun cookie e nessun profilo pubblicitario, quindi la mappa
+   si carica da sola e non serve più una fascia di consenso. */
 .map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.map-credit{position:absolute;right:0;bottom:0;padding:3px 8px;background:rgba(244,243,240,.9);border-top-left-radius:8px;font:500 11px var(--f-mono);letter-spacing:.06em;color:#3A414B}
+.map-credit a{border-bottom:1px solid rgba(58,65,75,.4)}
 
 /* ---------- Pagina servizi ---------- */
 .anchor-nav{position:sticky;top:var(--header-h);z-index:40;background:var(--carbone);border-top:1px solid var(--border-d);border-bottom:1px solid var(--border-d)}
@@ -323,24 +328,24 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
   transform:translateY(110%);opacity:0;transition:transform .28s cubic-bezier(.22,.7,.3,1),opacity .2s ease}
 .actionbar.is-visible{transform:none;opacity:1}
 .ab{min-height:56px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:12px;background:var(--surface-d);border:1px solid var(--border-d);font-size:13px;font-weight:600}
-.ab-primary{background:var(--cta);border-color:var(--cta);color:var(--cta-ink)}
+.ab-primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
 .ab:active{transform:scale(.97)}
-.ab-primary:active{background:var(--cta-press)}
+.ab-primary:active{background:var(--accent-press)}
 
-/* ---------- Cookie ---------- */
-.cookie{position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--surface-d);border-top:1px solid var(--border-d);
-  padding:16px var(--gutter) calc(16px + env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.35)}
-.cookie[hidden]{display:none}
-.cookie-inner{max-width:1200px;margin:0 auto;display:flex;flex-direction:column;gap:13px}
-.cookie p{font-size:15.5px;line-height:1.5;color:var(--muted-d);text-wrap:pretty}
-.cookie a{color:var(--text-d);border-bottom:1px solid rgba(244,246,248,.3)}
-.cookie-actions{display:flex;gap:8px}
-.cookie-actions .btn{flex:1}
-/* la fascia cookie resta appoggiata alla barra azioni, senza animazioni di posizione.
-   Quando sta sopra la barra non deve avere il proprio safe-area in basso: su iOS quel
-   valore passa da 0 a ~34px quando la toolbar del browser si ritira durante lo scroll,
-   e il vuoto sotto ai pulsanti Accetta / Solo necessari cresceva di conseguenza. */
-@media (max-width:1023.98px){body.has-actionbar .cookie{bottom:var(--ab-h);padding-bottom:16px}}
+/* ---------- Avviso di chiusura per ferie (B5) ----------
+   Compare da solo nei giorni prima della chiusura e sparisce quando riapre.
+   Le date stanno in assets/js/dati.js. */
+.notice{background:var(--surface-d);border-top:1px solid var(--border-d);border-bottom:1px solid var(--border-d)}
+.notice[hidden]{display:none}
+.notice-inner{padding-top:14px;padding-bottom:15px}
+.notice p{font-size:16.5px;line-height:1.45;color:var(--text-d);text-wrap:pretty}
+.notice b{font-weight:600}
+/* stessa impaginazione degli occhielli: filetto arancione + etichetta monospace */
+.notice em{display:flex;align-items:center;gap:9px;font:500 12.5px var(--f-mono);letter-spacing:.12em;font-style:normal;color:var(--accent);margin-bottom:5px}
+.notice em::before{content:"";width:18px;height:2px;background:var(--accent);flex:none}
+@media (min-width:768px){
+  .notice-inner{padding-top:16px;padding-bottom:17px}
+}
 /* Mobile: sulla pagina servizi la fascia recapiti non serve, chiude la sezione aperta.
    Sulla prenotazione, allo stesso modo, il footer viene rimosso: si chiude sul riepilogo. */
 @media (max-width:767.98px){
@@ -354,10 +359,8 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
   body[data-page="prenota"] main>.sec:last-child,
   body[data-page="contatti"] main>.sec:last-child{padding-bottom:calc(var(--ab-h) + 14px)}
 }
-body.has-cookie .actionbar{transform:none;opacity:1}
 /* mentre si compila un campo (tastiera aperta) la barra azioni si ritira */
 body.is-typing .actionbar{transform:translateY(110%);opacity:0;pointer-events:none}
-body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
 
 /* ---------- Legali ---------- */
 .legal{color:var(--text-l)}
@@ -401,10 +404,6 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
   .map{height:340px}
   .map--tall{height:380px}
   .stack{display:grid;grid-template-columns:1fr 1fr}
-  .cookie-inner{flex-direction:row;align-items:center;gap:32px}
-  .cookie p{flex:1}
-  .cookie-actions{flex:none}
-  .cookie-actions .btn{flex:none;white-space:nowrap}
 }
 
 /* =========================================================
@@ -417,8 +416,8 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
   .nav-desktop{display:flex;align-items:center;gap:34px}
   .nav-desktop>a:not(.btn){font-size:16px;font-weight:500;color:var(--muted-d);padding-bottom:3px}
   .nav-desktop>a:not(.btn):hover{color:var(--text-d)}
-  .nav-desktop>a.btn-primary{color:var(--cta-ink)}
-  .nav-desktop>a.btn-primary:hover{background:var(--cta-press);color:var(--cta-ink)}
+  .nav-desktop>a.btn-primary{color:var(--accent-ink)}
+  .nav-desktop>a.btn-primary:hover{background:var(--accent-press);color:var(--accent-ink)}
   .nav-desktop>a.is-current{color:var(--text-d);border-bottom:2px solid var(--accent)}
   .nav-sep{width:1px;height:26px;background:var(--border-d)}
   .nav-tel{font-size:16px;font-weight:600;color:var(--text-d)!important}
@@ -478,8 +477,6 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
   .contact-grid--page{grid-template-columns:1fr 1.1fr}
   .map{height:480px;min-height:0}
   .map--tall{height:330px}
-  .map-consent{flex-direction:row;align-items:center;justify-content:space-between;padding:20px 22px}
-  .map-consent p{max-width:420px}
 
   .anchor-nav{padding:0 0}
   .anchor-scroll{max-width:1200px;margin:0 auto;padding:0 var(--gutter);gap:32px;overflow:visible}
@@ -543,7 +540,9 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
 .channel-lab{display:block;font:500 12px var(--f-mono);letter-spacing:.13em;color:#8A919B;margin-bottom:5px}
 .lab-more{display:none}
 @media (min-width:768px){.lab-more{display:inline}}
-.channel-val{display:block;font-family:var(--f-title);font-weight:600;font-size:29px;line-height:1.05;color:var(--text-d)}
+/* line-height in px, non unitless: l'e-mail ha un corpo più piccolo ma deve occupare
+   la stessa altezza di riga, altrimenti flex-end disallinea la sua etichetta. */
+.channel-val{display:block;font-family:var(--f-title);font-weight:600;font-size:29px;line-height:30px;color:var(--text-d)}
 .channel-val--mail{font-size:26px}
 .channel em{color:var(--accent);font-style:normal;font-size:18px;line-height:1;margin-bottom:4px}
 /* Mobile: due recapiti affiancati e l'e-mail a tutta larghezza */
@@ -554,7 +553,7 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
   .channel:nth-child(2){border-left:1px solid var(--border-d);padding-left:14px}
   .channel:nth-child(3){grid-column:1 / -1}
   .channel-lab{font-size:11px;letter-spacing:.1em;margin-bottom:4px;white-space:nowrap}
-  .channel-val{font-size:21px}
+  .channel-val{font-size:21px;line-height:22px}
   .channel-val--mail{font-size:20px}
   .channel em{font-size:15px;margin-bottom:3px}
 }
@@ -569,7 +568,7 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
 .hour-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--border-l2);font-size:16.5px}
 .hour-row .day{flex:none;min-width:94px;font-weight:500;color:var(--text-l)}
 .hour-row .val{flex:1;text-align:right;color:#3A414B;white-space:nowrap}
-.hour-row.is-off .day,.hour-row.is-off .val{color:#8A919B}
+.hour-row.is-off .day,.hour-row.is-off .val{color:var(--faint-l)}
 .hour-row .today{flex:none;padding:3px 7px;border-radius:5px;background:var(--surface-d);font:500 11px var(--f-mono);letter-spacing:.1em;color:var(--accent)}
 @media (min-width:768px){
   .channels-grid{display:grid;grid-template-columns:1fr 1fr 1fr}
@@ -579,7 +578,7 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
 }
 @media (min-width:1024px){
   .channel{padding:26px 40px 28px}
-  .channel-val{font-size:34px}
+  .channel-val{font-size:34px;line-height:36px}
   .channel-val--mail{font-size:29px}
   .sede-title{font-size:30px}
   .sede-city,.hour-row{font-size:15px}
@@ -718,14 +717,24 @@ html.is-loading,html.is-loading body{overflow:hidden}
 @supports (backdrop-filter:blur(3px)){.loader{backdrop-filter:blur(3px)}}
 .loader[hidden]{display:none}
 .loader-box{max-width:360px}
-.loader-mark{display:block;width:76px;height:76px;margin:0 auto 24px;animation:dgSpin 1.15s linear infinite}
-.loader-mark img{width:100%;height:100%}
-@keyframes dgSpin{to{transform:rotate(360deg)}}
+/* I tre pezzi del marchio si ricompongono e si separano, in ciclo: stessa idea
+   dello splash d'ingresso. Prima girava di 360°, gesto goffo per un triangolo. */
+.loader-mark{position:relative;display:block;width:76px;height:76px;margin:0 auto 24px}
+.loader-mark i{position:absolute;left:50%;top:50%;width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:23px solid currentColor;margin:-11px 0 0 -13px;animation:dgAssemble 2.1s cubic-bezier(.3,.72,.28,1) infinite both}
+/* --fx/--fy: posizione a marchio composto · --dx/--dy: pezzi separati */
+.loader-mark i:nth-child(1){color:var(--accent);--fx:-13px;--fy:12px;--dx:-42px;--dy:32px}
+.loader-mark i:nth-child(2){color:var(--cta);--fx:13px;--fy:12px;--dx:42px;--dy:32px;animation-delay:.1s}
+.loader-mark i:nth-child(3){color:#00A54F;--fx:0px;--fy:-12px;--dx:0px;--dy:-42px;animation-delay:.2s}
+@keyframes dgAssemble{
+  0%{transform:translate(var(--dx),var(--dy)) scale(.8);opacity:0}
+  28%,64%{transform:translate(var(--fx),var(--fy)) scale(1);opacity:1}
+  100%{transform:translate(var(--dx),var(--dy)) scale(.8);opacity:0}
+}
 .loader-lab{margin:0 0 10px;font:500 12px var(--f-mono);letter-spacing:.14em;color:var(--accent)}
 .loader-title{font-family:var(--f-title);font-weight:700;font-size:30px;line-height:1.04;color:var(--text-d);margin:0}
 .loader-note{margin:11px 0 0;font-size:15.5px;line-height:1.5;color:var(--muted-d)}
-@media (min-width:1024px){.loader-title{font-size:34px}.loader-mark{width:86px;height:86px}}
-@media (prefers-reduced-motion:reduce){.loader-mark{animation-duration:2.6s}}
+@media (min-width:1024px){.loader-title{font-size:34px}}
+@media (prefers-reduced-motion:reduce){.loader-mark i{animation:none;opacity:1;transform:none}}
 
 
 /* =========================================================
@@ -752,11 +761,6 @@ html.is-loading,html.is-loading body{overflow:hidden}
 /* pagina corrente nel menu mobile */
 .drawer-nav a.is-current span,.drawer-nav a.is-current em{color:var(--accent)}
 
-/* revoca del consenso: pulsante nella fascia legale */
-.footer-cookie{all:unset;box-sizing:border-box;cursor:pointer;font:500 12px var(--f-mono);letter-spacing:.12em;color:#8A919B}
-.footer-cookie:hover{color:var(--accent)}
-.footer-cookie:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
-
 /* stato aperto/chiuso mostrato anche nell'hero della home */
 .hero .badge{margin-bottom:18px}
 
@@ -773,3 +777,33 @@ html.is-loading,html.is-loading body{overflow:hidden}
 
 /* messaggio di errore/esito annunciato ai lettori di schermo senza spostare il layout */
 .form-msg[hidden]{display:none}
+
+/* i link dentro i testi correnti devono vedersi: la regola generale è a{color:inherit} */
+.legal a:not(.btn),.link-testo{color:var(--text-l);border-bottom:1px solid #C9C4B9;padding-bottom:1px}
+.legal a:not(.btn):hover,.link-testo:hover{color:var(--accent);border-color:var(--accent)}
+.sec--dark .legal a:not(.btn),.sec--dark .link-testo{color:var(--text-d);border-color:var(--border-d2)}
+.legal .lede{margin-bottom:6px}
+.legal .acc-body{padding:0;animation:none}
+.legal code{background:rgba(22,25,31,.06);padding:1px 5px;border-radius:4px}
+
+/* =========================================================
+   STAMPA — riepilogo prenotazione, recapiti, testi legali
+   ========================================================= */
+@media print{
+  @page{margin:14mm}
+  html,body{background:#fff!important;color:#000!important;font-size:11pt}
+  .site-header,.actionbar,.drawer,.loader,.splash,.anchor-nav,.skip,
+  .hero-media,.hero-shade,.gallery,.map,.bk-ok-actions,.steps{display:none!important}
+  .sec,.page-head,.channels,.site-footer{background:#fff!important;color:#000!important;padding:0 0 10mm!important;border:0!important}
+  .sec h2,.sec h3,.page-head h1,.bk-ok h2,.legal h2{color:#000!important}
+  .lede,.legal p,.card p,.footer-hours,.footer-addr,.channel-val,.acc-body p{color:#1a1a1a!important}
+  .wrap{max-width:none;padding:0}
+  .card,.bk-ok,.bk-card,.note,.acc--boxed{border:1px solid #bbb!important;background:#fff!important;box-shadow:none!important}
+  .bk-ok-logo{width:90px;height:90px}
+  .reveal{opacity:1!important;transform:none!important}
+  .sec[hidden]{display:block!important}
+  /* l'indirizzo dei link esterni va stampato, altrimenti sulla carta è muto */
+  .legal a[href^="http"]::after,.footer-map::after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+  .site-footer{border-top:1px solid #bbb!important;padding-top:6mm!important}
+  .footer-col--nav{display:none!important}
+}

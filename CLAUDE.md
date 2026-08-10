@@ -24,15 +24,24 @@ veicolo, quindi si invita al contatto per la verifica.
 
 ```
 index.html        Home: hero, credenziali, servizi, focus GPL, perché, galleria, contatti, footer
-servizi.html      Menu ancore sticky + GPL/Revisioni/Officina/Pneumatici/Altri interventi + FAQ
+servizi.html      Barra a schede sticky + GPL/Revisioni/Officina/Pneumatici/Altri + FAQ
 contatti.html     Dati, orari, mappa con consenso, form 4 campi
-privacy.html      Da compilare
-cookie.html       Da compilare
-contatto.php      Invio e-mail, campo trappola anti-bot, risposta JSON per fetch
-assets/css/style.css   Foglio unico, mobile-first
-assets/js/main.js      Header, menu, orari, ancore, consenso cookie, mappa, form, reveal
-assets/img/FOTO.md     Elenco delle 9 foto con nomi file definitivi
+prenota.html      Prenotazione in 3 passi: calendario e slot, dati veicolo e cliente, riepilogo
+privacy.html      Privacy Policy (completa, due punti da confermare — vedi DECISIONI.md A6)
+cookie.html       Cookie Policy (completa)
+404.html          Pagina di errore, noindex
+contatto.php      Invio e-mail, campo trappola anti-bot, limite per IP, risposta JSON per fetch
+assets/css/style.css     Foglio unico, mobile-first
+assets/js/dati.js        Orari, ferie, festivi calcolati, recapiti, durate. Caricare per primo
+assets/js/main.js        Header, menu, orari, schede, consenso cookie, mappa, form, reveal
+assets/js/prenota-api.js Livello API (oggi mock): unico file da toccare al collegamento del backend
+assets/js/prenota.js     Interfaccia dei tre passi della prenotazione
+assets/img/FOTO.md       Elenco delle 9 foto con nomi file definitivi
 ```
+
+Orari, ferie e recapiti stanno **solo** in `assets/js/dati.js`: cambiarli lì, poi allineare gli
+elenchi scritti nelle pagine e il blocco JSON-LD. CSS e JS sono richiamati con `?v=N`: alzare il
+numero in tutte le pagine a ogni modifica.
 
 Header, menu e footer sono **duplicati** nelle pagine: se ne modifichi uno, allinea tutte le pagine.
 Non introdurre framework, bundler, npm, React o un generatore statico senza richiesta esplicita.
@@ -59,13 +68,13 @@ Non introdurre framework, bundler, npm, React o un generatore statico senza rich
 | Superficie chiara | `#EAE8E3` |
 | Testo su scuro | `#F4F6F8` · secondario `#A7AFBA` |
 | Testo su chiaro | `#16191F` · secondario `#5A616B` |
-| Accento arancione | `#F7931D` (pressed `#E0820C`) — solo dettagli: righe, numeri, hover, focus |
-| CTA / pulsanti pieni | `#0072BC` (pressed `#00609F`), testo `#FFFFFF` |
+| Arancione Delta | `#F7931D` (pressed `#E0820C`) — **azioni primarie** + dettagli: righe, numeri, hover, focus. Testo sopra: `#0D0F12` |
+| Blu | `#0072BC` (pressed `#00609F`) — solo link su fondo chiaro. Su carbone non arriva al contrasto AA |
 | Verde | `#22C55E` solo stati positivi |
 | Rosso | `#EF4444` solo errori |
 
-Regole: alternare sezioni scure e chiare, mai un sito interamente nero. Un solo colore acceso per
-volta. Nessun gradiente colorato: ammessi solo velature scure sulle fotografie per la leggibilità.
+Regole: **due soli fondi di sezione**, carbone e `--warm`, alternati; `--light` solo per gli incassi
+(mappa, placeholder, bordi). Mai un sito interamente nero. Un solo colore acceso per volta. Nessun gradiente colorato: ammessi solo velature scure sulle fotografie per la leggibilità.
 Vietati glassmorphism, neon, fibra di carbonio, fiamme, bandiere a scacchi, tachimetri decorativi,
 ingranaggi, chiavi inglesi come simbolo, auto sportive, eccesso di rosso.
 
@@ -101,11 +110,16 @@ garanzia": usare "Ricambi conformi e lavorazioni documentate". Se si usa la sigl
 - Menu a schermo intero con blocco dello scroll, chiusura con Esc, focus gestito.
 - Stato "Aperto / Chiuso" calcolato nel browser dalla costante `ORARI` in `main.js`. Se cambiano gli
   orari aggiorna: `ORARI`, gli elenchi nelle pagine e il blocco JSON-LD.
-- Mappa Google caricata **solo dopo il consenso** (chiave `dg-consenso` in localStorage); senza
-  consenso restano segnaposto e link esterno.
+- Mappa **OpenStreetMap** in un iframe statico: nessun cookie, nessuna fascia di consenso, nessuna
+  chiave in localStorage. Non reintrodurre Google Maps incorporato. Il link «Come arrivare» del
+  footer resta su Google Maps: è un clic esplicito, non un contenuto incorporato.
+- Avviso ferie in home: compare da solo 14 giorni prima, unisce i giorni di chiusura contigui
+  (ferie + festivi + domeniche) in un unico periodo. Date in `assets/js/dati.js`.
 - Form: 4 campi (nome, telefono o e-mail, servizio, messaggio), validazione inline, invio via fetch,
   fallback POST classico. **Non chiedere targa, libretto o altri dati tecnici al primo contatto.**
 - Accordion nativi `<details>`: funzionano senza JavaScript.
+- Velo di caricamento della prenotazione: i tre pezzi del marchio si compongono e si separano in
+  ciclo (tre triangoli CSS). Niente rotazioni del logo.
 - Animazioni discrete e `prefers-reduced-motion` rispettato. Vietati parallasse aggressivo, elementi
   che seguono il dito, animazioni infinite, autoplay video, caroselli automatici, 3D pesante.
 
@@ -123,10 +137,17 @@ titoli coerente, `alt` su ogni immagine informativa, link telefono/WhatsApp/e-ma
 
 ## Da completare (aperto)
 
-- [ ] 9 fotografie reali + testi alternativi
-- [ ] Logo vettoriale e allineamento dell'arancione `--accent` al file originale
-- [ ] Conferma dell'anno "Revisioni in sede dal 1997"
-- [ ] Privacy Policy e Cookie Policy
-- [ ] Favicon e immagine Open Graph
+Il dettaglio e le alternative stanno in `DECISIONI.md`. In sintesi:
+
+- [ ] **Bloccante:** `prenota-api.js` ha `USE_MOCK: true` — la prenotazione non arriva a nessuno.
+      Finché non è collegata (backend o e-mail) la pagina Prenota non può andare online.
+- [ ] 9 fotografie reali + testi alternativi (oggi sono collegamenti a images.pexels.com)
+- [ ] B7: header/menu/footer in `include` PHP — approvato, da fare come ultimo passo prima di
+      pubblicare (dopo, l'anteprima locale richiede un server PHP)
+- [ ] Confermare il segnaposto della mappa (43.2971, 13.7268: centro della via, non il civico 161)
+- [ ] Dominio canonico definitivo (`www` o no) e HTTPS attivo, poi regole `.htaccess` scommentate
+- [ ] Prezzo della revisione e numero di autorizzazione MCTC
+- [ ] Conferma dell'anno "Revisioni in sede dal 1997" ed eventuale pagina "Chi siamo"
+- [ ] Conferma dei due punti aperti in Privacy Policy (conservazione 24 mesi, destinatari)
+- [ ] Caratteri `.woff2` locali in `assets/font/` (CSS già pronto in fondo a `style.css`)
 - [ ] `contatto.php`: verificare `$DESTINATARIO` e `$MITTENTE` (dominio ospitato) e provare l'invio
-- [ ] HTTPS attivo e regole `.htaccess` scommentate

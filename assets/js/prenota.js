@@ -314,7 +314,11 @@
     CAMPI.forEach(function (n) { var c = q('#' + n); if (c && dati[n]) c.value = dati[n]; });
     var ck = q('#cortesia'); if (ck && dati.cortesia) ck.checked = true;
   }
-  el.form.addEventListener('input', salvaBozza);
+  var tBozza = null;
+  el.form.addEventListener('input', function () {
+    clearTimeout(tBozza);
+    tBozza = setTimeout(salvaBozza, 400);
+  });
   caricaBozza();
 
   /* ---------- promemoria nel calendario ---------- */
@@ -323,6 +327,8 @@
     return dt.getUTCFullYear() + due(dt.getUTCMonth() + 1) + due(dt.getUTCDate()) + 'T' +
       due(dt.getUTCHours()) + due(dt.getUTCMinutes()) + '00Z';
   }
+  /* RFC 5545: dentro i valori testuali virgole, punti e virgola e barre vanno protetti */
+  function icsTesto(v) { return String(v).replace(/\\/g, '\\\\').replace(/([,;])/g, '\\$1').replace(/\r?\n/g, '\\n'); }
   function scaricaIcs(payload, codice) {
     var pz = stato.ora.split(':');
     var dt = daIso(stato.data);
@@ -335,7 +341,7 @@
       'Veicolo: ' + payload.veicolo.modello + ' (' + payload.veicolo.targa + ')',
       'Delta Group S.r.l., Via Martiri di Belfiore 161, Civitanova Marche',
       'Per modifiche o disdette: 0733 815450'
-    ].join('\\n');
+    ].map(icsTesto).join('\\n');
     var ics = [
       'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Delta Group//Prenotazioni//IT', 'CALSCALE:GREGORIAN',
       'BEGIN:VEVENT',
@@ -343,10 +349,10 @@
       'DTSTAMP:' + icsData(new Date()),
       'DTSTART:' + icsData(inizio),
       'DTEND:' + icsData(fine),
-      'SUMMARY:' + titolo,
+      'SUMMARY:' + icsTesto(titolo),
       'DESCRIPTION:' + testo,
-      'LOCATION:Via Martiri di Belfiore 161, 62012 Civitanova Marche MC',
-      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + titolo, 'END:VALARM',
+      'LOCATION:' + icsTesto('Via Martiri di Belfiore 161, 62012 Civitanova Marche MC'),
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + icsTesto(titolo), 'END:VALARM',
       'END:VEVENT', 'END:VCALENDAR'
     ].join('\r\n');
     var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
@@ -453,5 +459,7 @@
   }
 
   /* ---------- avvio ---------- */
+  var campoAnno = q('#anno');
+  if (campoAnno) campoAnno.max = String(new Date().getFullYear() + 1);
   caricaMese(false);
 })();

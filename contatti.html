@@ -22,8 +22,9 @@
 <meta property="og:image:alt" content="Delta Group S.r.l. — autofficina e centro revisioni a Civitanova Marche">
 <meta property="og:site_name" content="Delta Group S.r.l.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="assets/img/logo-delta.png">
-<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/css/style.css?v=12">
 </head>
 <body data-page="contatti">
 <a class="skip" href="#main">Salta al contenuto</a>
@@ -89,7 +90,7 @@
   <section class="page-head">
     <div class="wrap">
       <p class="eyebrow"><span class="rule"></span>CONTATTI</p>
-      <h1>Parla con<br>l’officina</h1>
+      <h1>Parla con <br>l’officina</h1>
       <p class="lede">Telefono, WhatsApp o e-mail. Rispondiamo negli orari di apertura.</p>
       <p class="badge badge--dark js-stato" id="statusBadge" hidden><span class="dot"></span><span class="txt"></span></p>
     </div>
@@ -167,12 +168,10 @@
             <p class="hour-row is-off" data-day="0"><span class="day">Domenica</span><span class="val">Chiuso</span><span class="today" hidden>OGGI</span></p>
           </div>
         </div>
-        <div class="map map--tall" data-map>
+        <div class="map map--tall">
           <div class="map-ph" data-ph="MAPPA · VIA MARTIRI DI BELFIORE 161"></div>
-          <div class="map-consent">
-            <p>La mappa di Google viene caricata solo dopo il tuo consenso.</p>
-            <button type="button" class="btn btn-dark btn-sm" data-map-enable>Attiva la mappa</button>
-          </div>
+          <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=13.7228%2C43.2951%2C13.7308%2C43.2991&amp;layer=mapnik&amp;marker=43.2971%2C13.7268" title="Mappa della sede di Delta Group, via Martiri di Belfiore 161, Civitanova Marche" loading="lazy" referrerpolicy="no-referrer"></iframe>
+          <p class="map-credit"><a href="https://www.openstreetmap.org/?mlat=43.2971&amp;mlon=13.7268#map=16/43.2971/13.7268" target="_blank" rel="noopener">© OpenStreetMap</a></p>
         </div>
         <a class="btn btn-dark btn-block" href="https://maps.google.com/?q=Via+Martiri+di+Belfiore+161+Civitanova+Marche">
           <svg viewBox="0 0 24 24" aria-hidden="true" class="ico-nav"><path d="M12 3.2 20 20.5l-8-3.9-8 3.9Z"/></svg> Apri le indicazioni
@@ -263,7 +262,7 @@
     </div>
     <div class="footer-legal">
       <span class="footer-copy">© 2026 DELTA GROUP S.R.L.</span>
-      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a><button type="button" class="footer-cookie" data-cookie-reset>GESTISCI COOKIE</button></span>
+      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></span>
     </div>
   </div>
 </footer>
@@ -280,17 +279,7 @@
   </a>
 </nav>
 
-<div class="cookie" id="cookie" hidden>
-  <div class="cookie-inner">
-    <p>Usiamo cookie tecnici. La mappa di Google viene caricata solo con il tuo consenso. <a href="cookie.html">Cookie Policy</a></p>
-    <div class="cookie-actions">
-      <button type="button" class="btn btn-primary btn-sm" id="cookieOk">Accetta</button>
-      <button type="button" class="btn btn-outline btn-sm" id="cookieNo">Solo necessari</button>
-    </div>
-  </div>
-</div>
-
-<script src="assets/js/dati.js?v=4" defer></script>
-<script src="assets/js/main.js?v=4" defer></script>
+<script src="assets/js/dati.js?v=12" defer></script>
+<script src="assets/js/main.js?v=12" defer></script>
 </body>
 </html>

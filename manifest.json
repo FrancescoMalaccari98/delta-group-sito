@@ -1,0 +1,29 @@
+{
+  "name": "Delta Group S.r.l. — autofficina e centro revisioni",
+  "short_name": "Delta Group",
+  "description": "Impianti GPL e metano, revisioni, officina e pneumatici a Civitanova Marche.",
+  "lang": "it",
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0D0F12",
+  "theme_color": "#0D0F12",
+  "icons": [
+    {
+      "src": "/assets/img/icona-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icona-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/icona-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

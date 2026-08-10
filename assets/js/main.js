@@ -17,7 +17,7 @@
     var y = window.pageYOffset || d.documentElement.scrollTop;
     if (header) header.classList.toggle('is-scrolled', y > 40);
     if (bar) {
-      var show = y > barFrom || d.body.classList.contains('has-cookie');
+      var show = y > barFrom;
       bar.classList.toggle('is-visible', show);
       d.body.classList.toggle('has-actionbar', show);
     }
@@ -185,44 +185,48 @@
     mostra((location.hash || '').replace('#', ''), false);
   }
 
-  /* ---------- Consenso cookie e mappa ---------- */
-  var KEY = 'dg-consenso';
-  var MAPPA = 'https://www.google.com/maps?q=Via+Martiri+di+Belfiore+161,+62012+Civitanova+Marche+MC&output=embed';
-  function caricaMappe() {
-    qa('[data-map]').forEach(function (box) {
-      if (q('iframe', box)) return;
-      var f = d.createElement('iframe');
-      f.src = MAPPA;
-      f.title = 'Mappa della sede di Delta Group';
-      f.loading = 'lazy';
-      f.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-      box.appendChild(f);
-      var c = q('.map-consent', box); if (c) c.style.display = 'none';
+  /* ---------- Avviso di chiusura per ferie ----------
+     Le date straordinarie stanno in dati.js (FERIE). Il periodo mostrato non è
+     l'elenco grezzo: si estende ai giorni contigui in cui l'officina è comunque
+     chiusa (festivi e domeniche), così "14 e 17 agosto" diventa "dal 14 al 17".
+     L'avviso compare al massimo PREAVVISO_FERIE giorni prima e sparisce alla riapertura. */
+  var PREAVVISO_FERIE = 14;
+  var avviso = q('#ferie');
+  if (avviso && DATI.ferie && DATI.ferie.length) {
+    var MESI = ['gennaio','febbraio','marzo','aprile','maggio','giugno','luglio','agosto','settembre','ottobre','novembre','dicembre'];
+    var GIORNI = ['domenica','lunedì','martedì','mercoledì','giovedì','venerdì','sabato'];
+    var giorno = function (dt, n) { return new Date(dt.getFullYear(), dt.getMonth(), dt.getDate() + n); };
+    var chiuso = function (dt) { return fasce(dt).length === 0; };
+
+    var oggi = new Date(); oggi.setHours(0, 0, 0, 0);
+    var prossima = null;
+    DATI.ferie.slice().sort().forEach(function (g) {
+      if (prossima) return;
+      var pz = g.split('-'), dt = new Date(+pz[0], +pz[1] - 1, +pz[2]);
+      if (Math.round((dt - oggi) / 86400000) <= PREAVVISO_FERIE) {
+        /* la chiusura è passata solo quando è finito tutto il periodo contiguo */
+        var coda = dt;
+        while (chiuso(giorno(coda, 1))) { coda = giorno(coda, 1); }
+        if (coda >= oggi) prossima = dt;
+      }
     });
+
+    if (prossima) {
+      var da = prossima, a = prossima;
+      while (chiuso(giorno(da, -1))) { da = giorno(da, -1); }
+      while (chiuso(giorno(a, 1))) { a = giorno(a, 1); }
+      var testo;
+      if (+da === +a) testo = 'Chiusi ' + GIORNI[da.getDay()] + ' ' + da.getDate() + ' ' + MESI[da.getMonth()];
+      else if (da.getMonth() === a.getMonth()) testo = 'Chiusi dal ' + da.getDate() + ' al ' + a.getDate() + ' ' + MESI[a.getMonth()];
+      else testo = 'Chiusi dal ' + da.getDate() + ' ' + MESI[da.getMonth()] + ' al ' + a.getDate() + ' ' + MESI[a.getMonth()];
+
+      var riapre = giorno(a, 1);
+      var apertura = 'Riapriamo ' + GIORNI[riapre.getDay()] + ' ' + riapre.getDate() + ' ' + MESI[riapre.getMonth()] + ' alle ' + hhmm(fasce(riapre)[0][0]) + '.';
+      var pTag = q('p', avviso);
+      if (pTag) pTag.innerHTML = '<em>CHIUSURA PROGRAMMATA</em><b>' + testo + '.</b> ' + apertura;
+      avviso.hidden = false;
+    }
   }
-  var banner = q('#cookie');
-  var consenso = null;
-  try { consenso = localStorage.getItem(KEY); } catch (e) {}
-  if (consenso === 'si') caricaMappe();
-  else if (consenso !== 'no' && banner) {
-    banner.hidden = false;
-    d.body.classList.add('has-cookie');
-    if (bar) { bar.classList.add('is-visible'); d.body.classList.add('has-actionbar'); }
-  }
-  function salva(v) { try { localStorage.setItem(KEY, v); } catch (e) {} if (banner) banner.hidden = true; d.body.classList.remove('has-cookie'); onScroll(); }
-  var ok = q('#cookieOk'), no = q('#cookieNo');
-  if (ok) ok.addEventListener('click', function () { salva('si'); caricaMappe(); });
-  if (no) no.addEventListener('click', function () { salva('no'); });
-  qa('[data-map-enable]').forEach(function (b) {
-    b.addEventListener('click', function () { salva('si'); caricaMappe(); });
-  });
-  /* Revoca: la scelta va potuta cambiare in qualsiasi momento (art. 7 GDPR). */
-  qa('[data-cookie-reset]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      try { localStorage.removeItem(KEY); } catch (e) {}
-      location.reload();
-    });
-  });
 
   /* ---------- Form contatti ---------- */
   var form = q('#contactForm');

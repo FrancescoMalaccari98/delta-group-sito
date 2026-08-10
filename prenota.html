@@ -23,8 +23,9 @@
 <meta property="og:image:alt" content="Delta Group S.r.l. — autofficina e centro revisioni a Civitanova Marche">
 <meta property="og:site_name" content="Delta Group S.r.l.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="apple-touch-icon" href="assets/img/logo-delta.png">
-<link rel="stylesheet" href="assets/css/style.css?v=4">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="assets/css/style.css?v=12">
 </head>
 <body data-page="prenota">
 <a class="skip" href="#main">Salta al contenuto</a>
@@ -41,7 +42,7 @@
       <a href="contatti.html">Contatti</a>
       <span class="nav-sep"></span>
       <a class="nav-tel" href="tel:+390733815450">0733 815450</a>
-      <a class="btn btn-primary btn-sm" href="prenota.html">Prenota online</a>
+      <a class="btn btn-primary btn-sm" href="#bk" aria-current="page">Prenota online</a>
     </nav>
     <div class="header-actions">
       <a class="icon-btn" href="tel:+390733815450" aria-label="Chiama Delta Group">
@@ -91,7 +92,7 @@
   <section class="page-head page-head--short">
     <div class="wrap">
       <p class="eyebrow"><span class="rule"></span>PRENOTAZIONE ONLINE</p>
-      <h1>Prenota revisione<br>o tagliando</h1>
+      <h1>Prenota revisione <br>o tagliando</h1>
       <p class="lede">Scegli il giorno e l'orario disponibile, inserisci i dati del veicolo. Ricevi subito il riepilogo con il codice di prenotazione.</p>
     </div>
   </section>
@@ -290,7 +291,7 @@
     </div>
     <div class="footer-legal">
       <span class="footer-copy">© 2026 DELTA GROUP S.R.L.</span>
-      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a><button type="button" class="footer-cookie" data-cookie-reset>GESTISCI COOKIE</button></span>
+      <span class="footer-links"><a href="privacy.html">PRIVACY POLICY</a><a href="cookie.html">COOKIE POLICY</a></span>
     </div>
   </div>
 </footer>
@@ -309,26 +310,16 @@
 
 <div class="loader" id="loader" role="status" aria-live="polite" hidden>
   <div class="loader-box">
-    <span class="loader-mark" aria-hidden="true"><img src="assets/img/logo-delta.svg" alt=""></span>
+    <span class="loader-mark" aria-hidden="true"><i></i><i></i><i></i></span>
     <p class="loader-lab">RICHIESTA IN CORSO</p>
     <p class="loader-title">Stiamo confermando<br>la tua prenotazione</p>
     <p class="loader-note">Ci vogliono pochi secondi. Non chiudere la pagina.</p>
   </div>
 </div>
 
-<div class="cookie" id="cookie" hidden>
-  <div class="cookie-inner">
-    <p>Usiamo cookie tecnici. La mappa di Google viene caricata solo con il tuo consenso. <a href="cookie.html">Cookie Policy</a></p>
-    <div class="cookie-actions">
-      <button type="button" class="btn btn-primary btn-sm" id="cookieOk">Accetta</button>
-      <button type="button" class="btn btn-outline btn-sm" id="cookieNo">Solo necessari</button>
-    </div>
-  </div>
-</div>
-
-<script src="assets/js/dati.js?v=4" defer></script>
-<script src="assets/js/main.js?v=4" defer></script>
-<script src="assets/js/prenota-api.js?v=4" defer></script>
-<script src="assets/js/prenota.js?v=4" defer></script>
+<script src="assets/js/dati.js?v=12" defer></script>
+<script src="assets/js/main.js?v=12" defer></script>
+<script src="assets/js/prenota-api.js?v=12" defer></script>
+<script src="assets/js/prenota.js?v=12" defer></script>
 </body>
 </html>
