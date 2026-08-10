@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /contatto.php
+
+Sitemap: https://www.delta-group.it/sitemap.xml

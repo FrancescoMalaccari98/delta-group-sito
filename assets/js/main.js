@@ -1,10 +1,11 @@
 /* Delta Group S.r.l. — comportamenti di pagina
-   Nessuna dipendenza esterna. Caricato con defer. */
+   Nessuna dipendenza esterna. Caricato con defer, dopo dati.js. */
 (function () {
   'use strict';
   var d = document;
   var q = function (s, r) { return (r || d).querySelector(s); };
   var qa = function (s, r) { return Array.prototype.slice.call((r || d).querySelectorAll(s)); };
+  var DATI = window.DeltaDati || {};
 
   /* ---------- Header: stato dopo lo scroll ---------- */
   var header = q('#siteHeader');
@@ -51,6 +52,8 @@
 
   /* ---------- Menu mobile ---------- */
   var drawer = q('#drawer'), openBtn = q('#menuOpen'), closeBtn = q('#menuClose'), lastFocus = null;
+  var FOCUSABILI = 'a[href],button:not([disabled]),input,select,textarea,[tabindex]:not([tabindex="-1"])';
+
   function openDrawer() {
     if (!drawer) return;
     lastFocus = d.activeElement;
@@ -68,42 +71,59 @@
   }
   if (openBtn) openBtn.addEventListener('click', openDrawer);
   if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
-  d.addEventListener('keydown', function (e) { if (e.key === 'Escape' && drawer && !drawer.hidden) closeDrawer(); });
   qa('.drawer-nav a').forEach(function (a) { a.addEventListener('click', closeDrawer); });
 
+  /* Il menu è una finestra modale: il tabulatore non deve uscirne. */
+  d.addEventListener('keydown', function (e) {
+    if (!drawer || drawer.hidden) return;
+    if (e.key === 'Escape') { closeDrawer(); return; }
+    if (e.key !== 'Tab') return;
+    var lista = qa(FOCUSABILI, drawer).filter(function (el) { return el.offsetParent !== null; });
+    if (!lista.length) return;
+    var primo = lista[0], ultimo = lista[lista.length - 1];
+    if (e.shiftKey && d.activeElement === primo) { e.preventDefault(); ultimo.focus(); }
+    else if (!e.shiftKey && d.activeElement === ultimo) { e.preventDefault(); primo.focus(); }
+  });
+
   /* ---------- Stato aperto / chiuso ---------- */
-  /* Orari: lun-ven 08:00-12:00 e 14:00-19:00, sab 08:00-12:00, dom chiuso. */
-  var ORARI = { 1: [[480, 720], [840, 1140]], 2: [[480, 720], [840, 1140]], 3: [[480, 720], [840, 1140]], 4: [[480, 720], [840, 1140]], 5: [[480, 720], [840, 1140]], 6: [[480, 720]] };
-  function hhmm(min) { var h = Math.floor(min / 60), m = min % 60; return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m; }
+  /* Gli orari arrivano da dati.js: unico punto da modificare. */
+  var ORARI = DATI.ORARI || { 1: [[480, 720], [840, 1140]], 2: [[480, 720], [840, 1140]], 3: [[480, 720], [840, 1140]], 4: [[480, 720], [840, 1140]], 5: [[480, 720], [840, 1140]], 6: [[480, 720]] };
+  var CHIUSURE = DATI.CHIUSURE || [];
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function iso(dt) { return dt.getFullYear() + '-' + pad(dt.getMonth() + 1) + '-' + pad(dt.getDate()); }
+  function hhmm(min) { var h = Math.floor(min / 60), m = min % 60; return pad(h) + ':' + pad(m); }
+  function fasce(dt) {
+    if (CHIUSURE.indexOf(iso(dt)) > -1) return [];
+    return ORARI[dt.getDay()] || [];
+  }
   function stato() {
-    var now = new Date(), g = now.getDay(), m = now.getHours() * 60 + now.getMinutes();
-    var oggi = ORARI[g] || [];
-    for (var i = 0; i < oggi.length; i++) {
+    var now = new Date(), m = now.getHours() * 60 + now.getMinutes();
+    var oggi = fasce(now), i, j;
+    for (i = 0; i < oggi.length; i++) {
       if (m >= oggi[i][0] && m < oggi[i][1]) return { aperto: true, testo: 'Aperto ora · chiude alle ' + hhmm(oggi[i][1]) };
     }
-    for (var j = 0; j < oggi.length; j++) {
+    for (j = 0; j < oggi.length; j++) {
       if (m < oggi[j][0]) return { aperto: false, testo: 'Chiuso · apre alle ' + hhmm(oggi[j][0]) };
     }
-    var k = 1;
-    while (k < 8) {
-      var gg = (g + k) % 7;
-      if (ORARI[gg]) {
-        var nomi = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
-        var quando = k === 1 ? 'domani' : nomi[gg];
-        return { aperto: false, testo: 'Chiuso · apre ' + quando + ' alle ' + hhmm(ORARI[gg][0][0]) };
+    var nomi = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+    for (var k = 1; k < 15; k++) {
+      var dt = new Date(now.getFullYear(), now.getMonth(), now.getDate() + k);
+      var f = fasce(dt);
+      if (f.length) {
+        var quando = k === 1 ? 'domani' : (k < 7 ? nomi[dt.getDay()] : nomi[dt.getDay()] + ' ' + dt.getDate());
+        return { aperto: false, testo: 'Chiuso · apre ' + quando + ' alle ' + hhmm(f[0][0]) };
       }
-      k++;
     }
     return null;
   }
-  var badge = q('#statusBadge');
-  if (badge) {
-    var s = stato();
-    if (s) {
-      q('.txt', badge).textContent = s.testo;
-      badge.classList.toggle('is-closed', !s.aperto);
-      badge.hidden = false;
-    }
+  var badges = qa('.js-stato');
+  if (badges.length) {
+    var st = stato();
+    if (st) badges.forEach(function (b) {
+      q('.txt', b).textContent = st.testo;
+      b.classList.toggle('is-closed', !st.aperto);
+      b.hidden = false;
+    });
   }
 
   /* ---------- Orari: evidenzia il giorno corrente ---------- */
@@ -130,7 +150,11 @@
       /* la scheda mostrata è subito leggibile: niente attesa dell'animazione di comparsa */
       var att0 = panels[ids.indexOf(id)];
       if (att0) qa('.reveal', att0).forEach(function (el) { el.classList.add('is-in'); });
-      tabs.forEach(function (a, i) { a.classList.toggle('is-active', ids[i] === id); });
+      tabs.forEach(function (a, i) {
+        var on = ids[i] === id;
+        a.classList.toggle('is-active', on);
+        a.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
       var att = tabs[ids.indexOf(id)];
       if (att && att.scrollIntoViewIfNeeded) att.scrollIntoViewIfNeeded();
       if (vaiSu && ancora) {
@@ -145,6 +169,16 @@
         e.preventDefault();
         if (history.replaceState) history.replaceState(null, '', '#' + ids[i]);
         mostra(ids[i], true);
+      });
+      /* frecce sinistra/destra fra le schede, come si aspetta chi usa la tastiera */
+      a.addEventListener('keydown', function (e) {
+        var passo = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (!passo) return;
+        e.preventDefault();
+        var n = (i + passo + tabs.length) % tabs.length;
+        tabs[n].focus();
+        if (history.replaceState) history.replaceState(null, '', '#' + ids[n]);
+        mostra(ids[n], false);
       });
     });
     window.addEventListener('hashchange', function () { mostra(location.hash.replace('#', ''), true); });
@@ -170,7 +204,7 @@
   var consenso = null;
   try { consenso = localStorage.getItem(KEY); } catch (e) {}
   if (consenso === 'si') caricaMappe();
-  else if (banner) {
+  else if (consenso !== 'no' && banner) {
     banner.hidden = false;
     d.body.classList.add('has-cookie');
     if (bar) { bar.classList.add('is-visible'); d.body.classList.add('has-actionbar'); }
@@ -182,6 +216,13 @@
   qa('[data-map-enable]').forEach(function (b) {
     b.addEventListener('click', function () { salva('si'); caricaMappe(); });
   });
+  /* Revoca: la scelta va potuta cambiare in qualsiasi momento (art. 7 GDPR). */
+  qa('[data-cookie-reset]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      try { localStorage.removeItem(KEY); } catch (e) {}
+      location.reload();
+    });
+  });
 
   /* ---------- Form contatti ---------- */
   var form = q('#contactForm');
@@ -191,13 +232,15 @@
       var el = q('[name="' + name + '"]', form);
       var err = q('[data-err="' + name + '"]', form);
       if (el && el.closest('.field')) el.closest('.field').classList.toggle('has-error', on);
+      if (el) el.setAttribute('aria-invalid', on ? 'true' : 'false');
       if (err) err.hidden = !on;
     };
     form.addEventListener('submit', function (e) {
       var nome = form.nome.value.trim();
       var contatto = form.contatto.value.trim();
       var errNome = nome.length < 2;
-      var errCont = contatto.length < 5;
+      /* deve essere un telefono plausibile oppure un'e-mail plausibile */
+      var errCont = !(/^[+0-9][0-9 .\-()]{7,17}$/.test(contatto) || /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(contatto));
       mostraErrore('nome', errNome);
       mostraErrore('contatto', errCont);
       if (errNome || errCont) { e.preventDefault(); (errNome ? form.nome : form.contatto).focus(); return; }
@@ -228,9 +271,14 @@
     });
   }
 
-  /* ---------- Comparsa progressiva ---------- */
+  /* ---------- Comparsa progressiva ----------
+     Solo per ciò che è sotto la prima schermata: quello che si vede subito
+     deve essere già visibile, altrimenti si penalizza il caricamento percepito. */
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    var targets = qa('.sec .wrap > *, .creds-grid');
+    var alto = window.innerHeight || 800;
+    var targets = qa('.sec .wrap > *:not(.bk-step), .creds-grid').filter(function (el) {
+      return el.getBoundingClientRect().top > alto * 0.9;
+    });
     targets.forEach(function (el) { el.classList.add('reveal'); });
     var ro = new IntersectionObserver(function (es) {
       es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-in'); ro.unobserve(en.target); } });
@@ -273,13 +321,14 @@
       }
     }
     sp.classList.add('is-out');
-    t2 = setTimeout(finish, 760);
+    t2 = setTimeout(finish, 620);
   }
 
   window.scrollTo(0, 0);
-  t1 = setTimeout(fly, 1720);
+  /* più corto di prima: l'attesa pesava sul caricamento della pagina più importante */
+  t1 = setTimeout(fly, 900);
   sp.addEventListener('click', fly);
   sp.addEventListener('touchstart', fly, { passive: true });
   window.addEventListener('keydown', fly);
-  setTimeout(finish, 3800);
+  setTimeout(finish, 2300);
 })();

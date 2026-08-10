@@ -40,7 +40,8 @@
    4xx  { "ok": false, "errore": "dati_non_validi", "messaggio": "…" }
 
    REGOLE DI DISPONIBILITÀ (replicate nel mock, da applicare anche lato server)
-     · lun–ven 08:00–12:00 e 14:00–19:00, sabato 08:00–12:00, domenica chiuso
+     · orari, ferie, durate e posti arrivano da assets/js/dati.js: quello è
+       l'unico file da modificare per un cambio di orario o per le ferie
      · revisione: 45 min, 2 posti in parallelo
      · tagliando/officina: 90 min, 1 posto
      · preavviso minimo 24 h, orizzonte massimo 60 giorni
@@ -57,33 +58,24 @@
     TIMEOUT_MS: 12000
   };
 
-  var SERVIZI = {
+  /* Tutto ciò che riguarda l'attività sta in dati.js. Qui solo i valori di scorta,
+     nel caso quel file non venga caricato. */
+  var DATI = window.DeltaDati || {};
+  var FERIALE = [[480, 720], [840, 1140]];
+  var SERVIZI = DATI.servizi || {
     revisione: { label: 'Revisione', durata: 45, posti: 2 },
     tagliando: { label: 'Tagliando / officina', durata: 90, posti: 1 }
   };
-
-  /* 0 = domenica … 6 = sabato */
-  var ORARI = {
-    0: [],
-    1: [['08:00', '12:00'], ['14:00', '19:00']],
-    2: [['08:00', '12:00'], ['14:00', '19:00']],
-    3: [['08:00', '12:00'], ['14:00', '19:00']],
-    4: [['08:00', '12:00'], ['14:00', '19:00']],
-    5: [['08:00', '12:00'], ['14:00', '19:00']],
-    6: [['08:00', '12:00']]
-  };
-
-  /* Ferie e festivi: aggiungere le date in formato AAAA-MM-GG */
-  var CHIUSURE = ['2026-08-15', '2026-08-16', '2026-12-25', '2026-12-26', '2027-01-01'];
-
-  var PREAVVISO_ORE = 24;
-  var ORIZZONTE_GIORNI = 60;
+  /* 0 = domenica … 6 = sabato. Fasce in minuti dalla mezzanotte. */
+  var ORARI = DATI.ORARI || { 0: [], 1: FERIALE, 2: FERIALE, 3: FERIALE, 4: FERIALE, 5: FERIALE, 6: [[480, 720]] };
+  var CHIUSURE = DATI.CHIUSURE || [];
+  var PREAVVISO_ORE = DATI.preavvisoOre || 24;
+  var ORIZZONTE_GIORNI = DATI.orizzonteGiorni || 60;
 
   /* ---------- utilità ---------- */
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   function iso(dt) { return dt.getFullYear() + '-' + pad(dt.getMonth() + 1) + '-' + pad(dt.getDate()); }
   function daIso(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
-  function minuti(hhmm) { var p = hhmm.split(':'); return (+p[0]) * 60 + (+p[1]); }
   function oraDaMinuti(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
 
   /* occupazione finta ma stabile: la stessa data/ora dà sempre lo stesso esito */
@@ -123,7 +115,7 @@
       var slot = [];
       if (!chiuso) {
         for (var f = 0; f < fasce.length; f++) {
-          var da = minuti(fasce[f][0]), a = minuti(fasce[f][1]);
+          var da = fasce[f][0], a = fasce[f][1];
           for (var m = da; m + cfg.durata <= a; m += cfg.durata) {
             var ora = oraDaMinuti(m);
             var quando = new Date(d.getFullYear(), d.getMonth(), d.getDate(), Math.floor(m / 60), m % 60);

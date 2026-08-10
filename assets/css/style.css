@@ -4,9 +4,9 @@
 
 :root{
   --carbone:#0D0F12; --surface-d:#16191F; --surface-d2:#1A1F26; --border-d:#282D35; --border-d2:#3A414B;
-  --text-d:#F4F6F8; --muted-d:#A7AFBA; --faint-d:#5F6875;
+  --text-d:#F4F6F8; --muted-d:#A7AFBA; --faint-d:#7E8794;
   --warm:#F4F3F0; --light:#EAE8E3; --white:#FFFFFF; --border-l:#E2DFD8; --border-l2:#DCD8D1;
-  --text-l:#16191F; --muted-l:#5A616B; --faint-l:#9AA0A8;
+  --text-l:#16191F; --muted-l:#5A616B; --faint-l:#6E747C;
   --accent:#F7931D; --accent-press:#E0820C; --accent-ink:#0D0F12;
   --cta:#0072BC; --cta-press:#00609F; --cta-ink:#FFFFFF;
   --green:#22C55E; --green-ink:#14532D; --red:#EF4444;
@@ -48,7 +48,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .site-header.is-scrolled::before{opacity:1}
 .header-inner{height:100%;display:flex;align-items:center;justify-content:space-between;position:relative}
 .logo{display:flex;align-items:center;gap:9px}
-.logo-mark{width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:12px solid var(--accent)}
 .logo-img{width:42px;height:42px;flex:none;display:block}
 .logo-text{font-family:var(--f-title);font-weight:700;font-size:19px;letter-spacing:.07em;color:var(--text-d);line-height:1}
 .logo-text span{color:var(--muted-d);font-weight:500}
@@ -99,9 +98,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
   .bk-card--cal{padding:12px 6px}
   .cal-grid,.cal-dow{gap:2px}
 }
-.site-footer--min{border-top:0;padding-top:0;padding-bottom:100px}
-.footer-legal--min{flex-direction:row;align-items:center;justify-content:space-between;gap:16px;margin-top:0;padding-top:14px;border-top:1px solid #1F242C}
-.footer-legal--min a:hover{color:var(--accent)}
 
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:56px;padding:0 24px;border:1px solid transparent;border-radius:var(--r-m);font-size:17px;font-weight:600;cursor:pointer;transition:background .15s ease,transform .12s ease,border-color .15s ease}
@@ -160,7 +156,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .sec-head h2{margin-bottom:0}
 .sec-head{margin-bottom:26px}
 .with-num{display:flex;align-items:baseline;gap:10px}
-.with-num i{font:500 12px var(--f-mono);letter-spacing:.1em;color:var(--accent);font-style:normal}
 .page-head{padding:calc(var(--header-h) + 24px) 0 26px;background:var(--carbone)}
 .page-head h1{font-size:44px;line-height:.99;margin-bottom:12px}
 .page-head--short{padding-bottom:34px}
@@ -182,7 +177,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .row-thumb{width:58px;height:58px;border-radius:var(--r-s);flex:none}
 .row-body{flex:1;min-width:0}
 .row-title{display:flex;align-items:baseline;gap:8px;font-family:var(--f-title);font-weight:600;font-size:22px;line-height:1.1;color:var(--text-l)}
-.row-title i{font:500 11.5px var(--f-mono);letter-spacing:.1em;color:var(--faint-l);font-style:normal}
 .row-text{display:block;margin-top:3px;font-size:16px;line-height:1.4;color:var(--muted-l)}
 .row-service em{color:var(--faint-l);font-style:normal;font-size:20px}
 
@@ -201,7 +195,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 /* ---------- Perché ---------- */
 .why-grid{display:flex;flex-direction:column;gap:10px;margin-top:24px}
 .card{background:var(--white);border:1px solid var(--border-l);border-radius:14px;padding:16px 16px 17px}
-.card .tri{margin-bottom:6px}
 .card h3{font-size:23px;line-height:1.1;font-weight:600;color:var(--text-l);margin-bottom:6px}
 .card p{font-size:16.5px;line-height:1.5;color:var(--muted-l)}
 .sec--dark .card{background:var(--surface-d);border-color:var(--border-d)}
@@ -227,26 +220,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .badge--dark .dot{background:var(--green)}
 .badge--dark.is-closed{background:var(--surface-d);border-color:var(--border-d);color:var(--muted-d)}
 .badge--dark.is-closed .dot{background:var(--muted-d)}
-.info-card{background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l);overflow:hidden;color:var(--text-l)}
-.info-block{padding:16px}
-.info-block+.info-block,.info-row+.info-block,.info-block+.info-row,.info-row+.info-row{border-top:1px solid #EDEBE6}
-.info-block--last{padding:13px 16px 15px}
-.info-addr{font-size:17px;line-height:1.45;margin-top:6px}
-.info-addr span{color:var(--muted-l)}
-.info-addr--top{font-size:17px;line-height:1.5;color:var(--text-l);margin-bottom:20px}
-.info-row{display:flex;align-items:center;gap:12px;padding:14px 16px;min-height:56px}
-.info-row:active{background:var(--warm)}
-.info-val{flex:1;font-size:17px;font-weight:500}
-.info-row--stack{gap:14px}
-.info-row--stack>span:first-child{flex:1;display:block}
-.info-row--stack .label{display:block}
-.info-big{display:block;font-size:17.5px;font-weight:600;margin-top:2px}
-.info-row em{color:var(--faint-l);font-style:normal;font-size:20px}
-.hrow{display:flex;justify-content:space-between;gap:12px;font-size:16px;line-height:1.9}
-.hrow span:first-child{color:var(--muted-l)}
-.hrow .off{color:#8A919B}
-.piva{font-size:16px;color:var(--muted-l)}
-.brand-line{font-family:var(--f-title);font-weight:700;font-size:26px;line-height:1.1;color:var(--text-l);margin-bottom:4px}
 
 /* ---------- Mappa ---------- */
 .map{position:relative;height:190px;margin-top:12px;margin-bottom:12px;border-radius:var(--r-l);overflow:hidden;border:1px solid var(--border-l);background:#E4E1DA;background-image:repeating-linear-gradient(0deg,rgba(22,25,31,.07) 0 1px,rgba(0,0,0,0) 1px 34px),repeating-linear-gradient(90deg,rgba(22,25,31,.07) 0 1px,rgba(0,0,0,0) 1px 34px)}
@@ -327,7 +300,6 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .site-footer{background:var(--carbone);border-top:1px solid var(--border-d);padding:30px 0 128px}
 .footer-grid{display:grid;grid-template-columns:1fr;gap:22px}
 .footer-addr{font-size:14.5px;line-height:1.6;color:var(--muted-d);margin-top:12px}
-.footer-note{margin:14px 0 0;font:500 11.5px/1.7 var(--f-mono);letter-spacing:.1em;color:#8A919B}
 .footer-col--nav{display:none}
 .footer-hours{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0;padding:8px 0;border-bottom:1px solid #1F242C;font-size:14.5px;color:var(--muted-d)}
 .footer-hours:last-child{border-bottom:0}
@@ -341,7 +313,7 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
 .footer-col a:hover{color:var(--accent)}
 .footer-legal{display:flex;flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 22px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border-d);font:500 12px var(--f-mono);letter-spacing:.12em;color:#8A919B}
 .footer-links{display:flex;gap:22px}
-.footer-copy{color:#6F757E}
+.footer-copy{color:#8A919B}
 .footer-links a{color:#8A919B}
 .footer-links a:hover{color:var(--accent);border-color:var(--accent)}
 
@@ -373,6 +345,8 @@ svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke
    Sulla prenotazione, allo stesso modo, il footer viene rimosso: si chiude sul riepilogo. */
 @media (max-width:767.98px){
   body[data-page="servizi"] .channels{display:none}
+  body[data-page="home"] .site-footer,
+  body[data-page="servizi"] .site-footer,
   body[data-page="prenota"] .site-footer,
   body[data-page="contatti"] .site-footer{display:none}
   body[data-page="prenota"] main,
@@ -449,18 +423,17 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
   .nav-sep{width:1px;height:26px;background:var(--border-d)}
   .nav-tel{font-size:16px;font-weight:600;color:var(--text-d)!important}
   .logo-text{font-size:23px}
-  .logo-mark{border-left-width:9px;border-right-width:9px;border-bottom-width:15px}
   .drawer{display:none!important}
   .actionbar{display:none}
   .site-footer{padding-bottom:44px}
 
-  .hero{height:440px;align-items:center}
+  .hero{height:520px;align-items:center}
   .hero-shade{background:linear-gradient(100deg,rgba(13,15,18,.94) 0%,rgba(13,15,18,.8) 42%,rgba(13,15,18,.42) 72%,rgba(13,15,18,.6) 100%)}
   .hero-media.ph::after{align-items:flex-start;justify-content:flex-end;padding:120px 60px 0 0;text-align:right}
   .hero-inner{padding-top:68px;padding-bottom:0}
-  .hero h1{font-size:58px;line-height:.94;margin-bottom:16px}
-  .hero .lede{max-width:540px;font-size:16px;margin-bottom:24px}
-  .hero .btn{min-height:44px;padding:0 26px;font-size:15px}
+  .hero h1{font-size:68px;line-height:.94;margin-bottom:18px}
+  .hero .lede{max-width:560px;font-size:17px;margin-bottom:26px}
+  .hero .btn{min-height:48px;padding:0 28px;font-size:16px}
   .eyebrow{font-size:12px;letter-spacing:.15em;align-items:center;margin-bottom:16px}
   .rule{width:26px;margin-top:0}
 
@@ -503,12 +476,6 @@ body.is-typing .cookie{bottom:0;padding-bottom:calc(16px + env(safe-area-inset-b
 
   .contact-grid{grid-template-columns:1fr 1.25fr;gap:48px}
   .contact-grid--page{grid-template-columns:1fr 1.1fr}
-  .info-card{border-radius:18px}
-  .info-block{padding:22px 26px}
-  .info-row{padding:20px 26px;min-height:64px}
-  .info-val,.hrow{font-size:17px}
-  .info-big{font-size:17.5px}
-  .brand-line{font-size:32px}
   .map{height:480px;min-height:0}
   .map--tall{height:330px}
   .map-consent{flex-direction:row;align-items:center;justify-content:space-between;padding:20px 22px}
@@ -741,10 +708,9 @@ html.no-splash .splash{display:none}
 @media (prefers-reduced-motion:reduce){.splash{display:none}}
 
 /* Home e Servizi: chiudono senza footer, spazio per la barra azioni */
-body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:calc(var(--ab-h) + 12px)}
+@media (max-width:767.98px){body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:calc(var(--ab-h) + 12px)}}
 body[data-page="home"] .sec--flush{padding-bottom:0}
 body[data-page="home"] .gallery{padding-bottom:2px}
-@media (min-width:1024px){body[data-page="home"] main,body[data-page="servizi"] main{padding-bottom:20px}}
 
 /* ---------- Caricamento a schermo pieno ---------- */
 html.is-loading,html.is-loading body{overflow:hidden}
@@ -760,3 +726,50 @@ html.is-loading,html.is-loading body{overflow:hidden}
 .loader-note{margin:11px 0 0;font-size:15.5px;line-height:1.5;color:var(--muted-d)}
 @media (min-width:1024px){.loader-title{font-size:34px}.loader-mark{width:86px;height:86px}}
 @media (prefers-reduced-motion:reduce){.loader-mark{animation-duration:2.6s}}
+
+
+/* =========================================================
+   AGGIUNTE — revisione agosto 2026
+   ========================================================= */
+
+/* Font: oggi arrivano dal CDN di Google, che riceve l'IP del visitatore prima
+   di qualunque consenso. Per servirli dal dominio: scaricare i .woff2 da
+   google-webfonts-helper, metterli in assets/font/, togliere il <link> di
+   fonts.googleapis.com dalle pagine e attivare il blocco qui sotto.
+
+@font-face{font-family:'Barlow Semi Condensed';font-style:normal;font-weight:600;font-display:swap;
+  src:url('../font/barlow-semi-condensed-600.woff2') format('woff2')}
+@font-face{font-family:'Barlow Semi Condensed';font-style:normal;font-weight:700;font-display:swap;
+  src:url('../font/barlow-semi-condensed-700.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;
+  src:url('../font/inter-400.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:swap;
+  src:url('../font/inter-500.woff2') format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:swap;
+  src:url('../font/inter-600.woff2') format('woff2')}
+*/
+
+/* pagina corrente nel menu mobile */
+.drawer-nav a.is-current span,.drawer-nav a.is-current em{color:var(--accent)}
+
+/* revoca del consenso: pulsante nella fascia legale */
+.footer-cookie{all:unset;box-sizing:border-box;cursor:pointer;font:500 12px var(--f-mono);letter-spacing:.12em;color:#8A919B}
+.footer-cookie:hover{color:var(--accent)}
+.footer-cookie:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+
+/* stato aperto/chiuso mostrato anche nell'hero della home */
+.hero .badge{margin-bottom:18px}
+
+/* conferma prenotazione: tre azioni che devono stare su una riga sola quando c'e' spazio */
+.bk-ok-actions{flex-wrap:wrap;gap:10px}
+.bk-ok-actions .btn{min-width:0;flex:1 1 46%}
+@media (min-width:768px){.bk-ok-actions .btn{flex:0 0 auto;min-width:190px}}
+
+/* la barra credenziali porta i tre argomenti piu forti: non deve essere la riga piu piccola */
+@media (min-width:1024px){
+  .creds-grid p{font-size:16.5px;min-height:74px}
+  .mark{width:26px;height:26px}
+}
+
+/* messaggio di errore/esito annunciato ai lettori di schermo senza spostare il layout */
+.form-msg[hidden]{display:none}

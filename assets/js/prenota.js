@@ -44,7 +44,7 @@
     recapServ: q('#recapServ'), recapWhen: q('#recapWhen'), backTo1: q('#backTo1'),
     form: q('#bkForm'), formMsg: q('#formMsg'), submit: q('#bkSubmit'),
     okWhen: q('#okWhen'), okList: q('#okList'), okTitle: q('#okTitle'),
-    fieldKm: q('#fieldKm')
+    okIcs: q('#okIcs'), okWa: q('#okWa')
   };
 
   /* ---------- passi ---------- */
@@ -241,7 +241,9 @@
   el.backTo1.addEventListener('click', function () { vaiAlPasso(1); });
 
   /* ---------- validazione ---------- */
-  var RE_TARGA = /^[A-Z]{2}\s?[0-9]{3}\s?[A-Z]{2}$|^[A-Z]{2}\s?[0-9]{5}$|^[A-Z0-9]{5,8}$/;
+  /* targhe italiane: AB123CD (auto), AB12345 e AB1234A (moto e ciclomotori),
+     più le sigle speciali. Gli spazi vengono togliti prima del controllo. */
+  var RE_TARGA = /^[A-Z]{2}[0-9]{3}[A-Z]{2}$|^[A-Z]{2}[0-9]{5}$|^[A-Z]{2}[0-9]{4}[A-Z]$|^(X|CC|CD|EE)[A-Z0-9]{4,6}$/;
   var RE_TEL = /^[+0-9][0-9 .\-]{7,17}$/;
   var RE_MAIL = /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i;
 
@@ -253,7 +255,7 @@
   }
 
   function valida() {
-    var v = q('#targa').value.trim().toUpperCase();
+    var v = q('#targa').value.toUpperCase().replace(/[\s.-]/g, '');
     var ok = segna('targa', !RE_TARGA.test(v));
     ok = segna('modello', q('#modello').value.trim().length < 2) && ok;
     var anno = +q('#anno').value;
@@ -268,21 +270,91 @@
     return ok;
   }
 
-  /* ---------- velo di caricamento ---------- */
-  var veloEl = q('#loader'), veloDa = 0;
+  /* ---------- velo di caricamento ----------
+     Compare solo se la risposta tarda più di 250 ms, e resta il minimo
+     necessario a non farlo lampeggiare. Nessuna attesa aggiunta. */
+  var veloEl = q('#loader'), veloDa = 0, veloTimer = null;
   function veloApri() {
-    veloDa = Date.now();
     if (!veloEl) return;
-    veloEl.hidden = false;
-    d.documentElement.classList.add('is-loading');
+    veloTimer = setTimeout(function () {
+      veloDa = Date.now();
+      veloEl.hidden = false;
+      d.documentElement.classList.add('is-loading');
+    }, 250);
   }
-  /* resta visibile almeno 4,7 s: tempo per leggere l'avviso e vedere il marchio girare */
   function veloChiudi(poi) {
-    var resta = Math.max(0, 4700 - (Date.now() - veloDa));
+    clearTimeout(veloTimer);
+    if (!veloEl || veloEl.hidden) { poi(); return; }
     setTimeout(function () {
-      if (veloEl) { veloEl.hidden = true; d.documentElement.classList.remove('is-loading'); }
+      veloEl.hidden = true;
+      d.documentElement.classList.remove('is-loading');
       poi();
-    }, resta);
+    }, Math.max(0, 700 - (Date.now() - veloDa)));
+  }
+
+  /* ---------- bozza dei dati ----------
+     Un ricaricamento a metà compilazione non deve cancellare tutto.
+     Scade dopo 30 minuti: sono dati personali, non vanno tenuti oltre il necessario. */
+  var BOZZA = 'dg-bozza-prenota';
+  var CAMPI = ['tipo', 'targa', 'modello', 'anno', 'alimentazione', 'km', 'nome', 'tel', 'email', 'note'];
+  function salvaBozza() {
+    var dati = { ts: Date.now() };
+    CAMPI.forEach(function (n) { var c = q('#' + n); if (c) dati[n] = c.value; });
+    var ck = q('#cortesia'); if (ck) dati.cortesia = ck.checked;
+    try { localStorage.setItem(BOZZA, JSON.stringify(dati)); } catch (e) {}
+  }
+  function pulisciBozza() { try { localStorage.removeItem(BOZZA); } catch (e) {} }
+  function caricaBozza() {
+    var raw = null;
+    try { raw = localStorage.getItem(BOZZA); } catch (e) {}
+    if (!raw) return;
+    var dati;
+    try { dati = JSON.parse(raw); } catch (e) { return pulisciBozza(); }
+    if (!dati || !dati.ts || Date.now() - dati.ts > 1800000) return pulisciBozza();
+    CAMPI.forEach(function (n) { var c = q('#' + n); if (c && dati[n]) c.value = dati[n]; });
+    var ck = q('#cortesia'); if (ck && dati.cortesia) ck.checked = true;
+  }
+  el.form.addEventListener('input', salvaBozza);
+  caricaBozza();
+
+  /* ---------- promemoria nel calendario ---------- */
+  function due(n) { return (n < 10 ? '0' : '') + n; }
+  function icsData(dt) {
+    return dt.getUTCFullYear() + due(dt.getUTCMonth() + 1) + due(dt.getUTCDate()) + 'T' +
+      due(dt.getUTCHours()) + due(dt.getUTCMinutes()) + '00Z';
+  }
+  function scaricaIcs(payload, codice) {
+    var pz = stato.ora.split(':');
+    var dt = daIso(stato.data);
+    var inizio = new Date(dt.getFullYear(), dt.getMonth(), dt.getDate(), +pz[0], +pz[1]);
+    var durata = (API.servizi[stato.servizio] || {}).durata || 45;
+    var fine = new Date(inizio.getTime() + durata * 60000);
+    var titolo = API.servizi[stato.servizio].label + ' — Delta Group';
+    var testo = [
+      'Prenotazione ' + codice,
+      'Veicolo: ' + payload.veicolo.modello + ' (' + payload.veicolo.targa + ')',
+      'Delta Group S.r.l., Via Martiri di Belfiore 161, Civitanova Marche',
+      'Per modifiche o disdette: 0733 815450'
+    ].join('\\n');
+    var ics = [
+      'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Delta Group//Prenotazioni//IT', 'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      'UID:' + codice + '@delta-group.it',
+      'DTSTAMP:' + icsData(new Date()),
+      'DTSTART:' + icsData(inizio),
+      'DTEND:' + icsData(fine),
+      'SUMMARY:' + titolo,
+      'DESCRIPTION:' + testo,
+      'LOCATION:Via Martiri di Belfiore 161, 62012 Civitanova Marche MC',
+      'BEGIN:VALARM', 'TRIGGER:-P1D', 'ACTION:DISPLAY', 'DESCRIPTION:' + titolo, 'END:VALARM',
+      'END:VEVENT', 'END:VCALENDAR'
+    ].join('\r\n');
+    var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+    var a = d.createElement('a');
+    a.href = url;
+    a.download = 'delta-group-' + codice + '.ics';
+    d.body.appendChild(a); a.click(); d.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
   }
 
   /* ---------- invio ---------- */
@@ -365,10 +437,18 @@
       ['E-mail', payload.cliente.email]
     ];
     if (payload.cliente.autoCortesia) righe.push(['Auto di cortesia', 'richiesta']);
+    if (r.codice) righe.unshift(['Codice prenotazione', r.codice]);
     if (payload.cliente.note) righe.push(['Note', payload.cliente.note]);
     el.okList.innerHTML = righe.map(function (r2) {
       return '<div><dt>' + r2[0] + '</dt><dd>' + r2[1].replace(/</g, '&lt;') + '</dd></div>';
     }).join('');
+    pulisciBozza();
+    if (el.okIcs) el.okIcs.onclick = function () { scaricaIcs(payload, r.codice || 'DG'); };
+    if (el.okWa) {
+      el.okWa.href = 'https://wa.me/393487619808?text=' + encodeURIComponent(
+        'Salve, ho prenotato dal sito: ' + API.servizi[stato.servizio].label + ' ' + quandoTesto() +
+        (r.codice ? ' (codice ' + r.codice + ')' : '') + '. Veicolo ' + payload.veicolo.modello + ' ' + payload.veicolo.targa + '.');
+    }
     vaiAlPasso(3);
   }
 
