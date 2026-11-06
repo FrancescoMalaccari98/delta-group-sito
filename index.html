@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="assets/css/style.css?v=12">
+<link rel="stylesheet" href="assets/css/style.css?v=13">
 <script>/* lo splash si vede al massimo una volta al giorno: per chi torna spesso è solo attesa */
 (function(){var r=document.documentElement;try{var t=+localStorage.getItem('dg-splash')||0;if(Date.now()-t<86400000){r.className+=' no-splash';return}localStorage.setItem('dg-splash',String(Date.now()))}catch(e){}r.className+=' splashing'})();</script>
 </head>
@@ -102,16 +102,15 @@
 <main id="main">
   <section class="hero">
     <div class="hero-media ph" role="img" aria-label="Ingresso dell'officina Delta Group con un'auto sul ponte sollevatore" style="background-image:url('https://images.pexels.com/photos/33814734/pexels-photo-33814734.jpeg?auto=compress&cs=tinysrgb&w=1600')" data-ph="FOTO-01-HERO · INGRESSO OFFICINA, AUTO SUL PONTE"></div>
-    <div class="hero-shade"></div>
     <div class="wrap hero-inner">
-      <p class="eyebrow"><span class="rule"></span>AUTOFFICINA E CENTRO REVISIONI · CIVITANOVA MARCHE</p>
-      <h1>Specialisti in <br>GPL e metano</h1>
+      <p class="eyebrow"><span class="tri" aria-hidden="true"></span>AUTOFFICINA E CENTRO REVISIONI · CIVITANOVA MARCHE</p>
+      <h1><span class="ln"><span>Specialisti in</span></span> <span class="ln ln--accent"><span>GPL e metano</span></span></h1>
       <p class="lede">Impianti, bombole, revisioni, officina e pneumatici. Un unico centro tecnico per la tua auto.</p>
-      <p class="badge badge--dark js-stato" hidden><span class="dot"></span><span class="txt"></span></p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="servizi.html">Scopri i servizi <span aria-hidden="true">→</span></a>
         <a class="link-arrow" href="contatti.html">Dove siamo <span aria-hidden="true">→</span></a>
       </div>
+      <p class="badge badge--dark js-stato" hidden><span class="dot"></span><span class="txt"></span></p>
     </div>
   </section>
 
@@ -138,31 +137,47 @@
         </div>
         <a class="link-quiet" href="servizi.html">Vai alla pagina Servizi <span aria-hidden="true">→</span></a>
       </div>
-      <div class="serv-grid">
-        <a class="card-main" href="servizi.html#gpl">
-          <span class="card-main-media ph" style="background-image:url('https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1200')" data-ph="FOTO-02-GPL · MONTAGGIO IMPIANTO BRC"><i class="num">01</i></span>
-          <span class="card-main-body">
-            <span class="card-main-title"><strong>GPL e metano</strong><em aria-hidden="true">→</em></span>
-            <span class="card-main-text">Installazione, manutenzione, serbatoi GPL, bombole metano CNG4 e assistenza BRC.</span>
+      <div class="svc-stack">
+        <a class="svc" href="servizi.html#gpl" style="--i:0">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-02-GPL · MONTAGGIO IMPIANTO BRC"></span></span>
+          <span class="svc-body">
+            <span class="svc-num outline-num" aria-hidden="true">01</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>SPECIALIZZAZIONE</span>
+            <span class="svc-title">GPL e metano</span>
+            <span class="svc-text">Installazione, manutenzione, serbatoi GPL, bombole metano CNG4 e assistenza BRC.</span>
+            <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
           </span>
         </a>
-        <div class="serv-rows">
-          <a class="row-service" href="servizi.html#revisioni">
-            <span class="row-thumb ph-s" aria-hidden="true" style="background-image:url('https://images.pexels.com/photos/33814736/pexels-photo-33814736.jpeg?auto=compress&cs=tinysrgb&w=200')"></span>
-            <span class="row-body"><span class="row-title">Revisioni</span><span class="row-text">Controlli periodici per auto e moto, effettuati direttamente in sede.</span></span>
-            <em aria-hidden="true">›</em>
-          </a>
-          <a class="row-service" href="servizi.html#officina">
-            <span class="row-thumb ph-s" aria-hidden="true" style="background-image:url('https://images.pexels.com/photos/5158091/pexels-photo-5158091.jpeg?auto=compress&cs=tinysrgb&w=200')"></span>
-            <span class="row-body"><span class="row-title">Officina</span><span class="row-text">Meccanica, elettrauto e diagnosi multimarca.</span></span>
-            <em aria-hidden="true">›</em>
-          </a>
-          <a class="row-service" href="servizi.html#pneumatici">
-            <span class="row-thumb ph-s" aria-hidden="true" style="background-image:url('https://images.pexels.com/photos/4116170/pexels-photo-4116170.jpeg?auto=compress&cs=tinysrgb&w=200')"></span>
-            <span class="row-body"><span class="row-title">Pneumatici</span><span class="row-text">Controllo, sostituzione, assetto e convergenza.</span></span>
-            <em aria-hidden="true">›</em>
-          </a>
-        </div>
+        <a class="svc" href="servizi.html#revisioni" style="--i:1">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/33814736/pexels-photo-33814736.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-03-REVISIONI · AREA REVISIONI IN SEDE"></span></span>
+          <span class="svc-body">
+            <span class="svc-num outline-num" aria-hidden="true">02</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>IN SEDE</span>
+            <span class="svc-title">Revisioni</span>
+            <span class="svc-text">Controlli periodici per auto e moto, effettuati direttamente in sede.</span>
+            <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <a class="svc" href="servizi.html#officina" style="--i:2">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/5158091/pexels-photo-5158091.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-08-OFFICINA · TESTER COLLEGATO"></span></span>
+          <span class="svc-body">
+            <span class="svc-num outline-num" aria-hidden="true">03</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>MULTIMARCA</span>
+            <span class="svc-title">Officina</span>
+            <span class="svc-text">Meccanica, elettrauto e diagnosi multimarca.</span>
+            <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <a class="svc" href="servizi.html#pneumatici" style="--i:3">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/4116170/pexels-photo-4116170.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-09-PNEUMATICI · EQUILIBRATRICE"></span></span>
+          <span class="svc-body">
+            <span class="svc-num outline-num" aria-hidden="true">04</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>GOMME</span>
+            <span class="svc-title">Pneumatici</span>
+            <span class="svc-text">Controllo, sostituzione, assetto e convergenza.</span>
+            <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -316,7 +331,7 @@
   </a>
 </nav>
 
-<script src="assets/js/dati.js?v=12" defer></script>
-<script src="assets/js/main.js?v=12" defer></script>
+<script src="assets/js/dati.js?v=13" defer></script>
+<script src="assets/js/main.js?v=13" defer></script>
 </body>
 </html>
