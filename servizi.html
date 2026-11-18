@@ -24,7 +24,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="assets/css/style.css?v=14">
+<link rel="stylesheet" href="assets/css/style.css?v=17">
 </head>
 <body data-page="servizi">
 <a class="skip" href="#main">Salta al contenuto</a>
@@ -67,10 +67,11 @@
   <nav class="drawer-nav" aria-label="Menu">
     <a href="index.html"><span>Home</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html" class="is-current" aria-current="page"><span>Servizi</span><em aria-hidden="true">›</em></a>
-    <a href="servizi.html#gpl"><span>GPL e metano</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#tagliando"><span>Tagliando</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#revisioni"><span>Revisioni</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#officina"><span>Officina</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#pneumatici"><span>Pneumatici</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#gpl"><span>GPL e metano</span><em aria-hidden="true">›</em></a>
     <a href="prenota.html"><span>Prenota online</span><em aria-hidden="true">›</em></a>
     <a href="contatti.html"><span>Contatti</span><em aria-hidden="true">›</em></a>
   </nav>
@@ -97,34 +98,151 @@
 
   <nav class="anchor-nav" aria-label="Sezioni della pagina">
     <div class="anchor-scroll" role="tablist" aria-label="Sezioni dei servizi">
-      <a href="#gpl" id="tab-gpl" role="tab" aria-controls="gpl" aria-selected="false">GPL e metano</a>
+      <a href="#tagliando" id="tab-tagliando" role="tab" aria-controls="tagliando" aria-selected="false">Tagliando</a>
       <a href="#revisioni" id="tab-revisioni" role="tab" aria-controls="revisioni" aria-selected="false">Revisioni</a>
       <a href="#officina" id="tab-officina" role="tab" aria-controls="officina" aria-selected="false">Officina</a>
       <a href="#pneumatici" id="tab-pneumatici" role="tab" aria-controls="pneumatici" aria-selected="false">Pneumatici</a>
+      <a href="#gpl" id="tab-gpl" role="tab" aria-controls="gpl" aria-selected="false">GPL e metano</a>
       <a href="#altri" id="tab-altri" role="tab" aria-controls="altri" aria-selected="false">Altri interventi</a>
-        <a href="#faq" id="tab-faq" role="tab" aria-controls="faq" aria-selected="false">Domande frequenti</a>
+      <a href="#faq" id="tab-faq" role="tab" aria-controls="faq" aria-selected="false">Domande frequenti</a>
     </div>
   </nav>
 
-  <section class="sec sec--warm" id="gpl" role="tabpanel" aria-labelledby="tab-gpl">
-    <div class="wrap split">
-      <div>
-        <h2 class="with-num">GPL e metano</h2>
-        <p class="lede">Installiamo e manteniamo impianti a gas con supporto BRC. Interveniamo su serbatoi GPL, bombole metano CNG4 e diagnosi dell’impianto, seguendo il veicolo anche negli anni successivi.</p>
-        <div class="media-m ph" style="background-image:url('https://images.pexels.com/photos/8985517/pexels-photo-8985517.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-06-IMPIANTO · RIDUTTORE BRC NEL VANO MOTORE"></div>
-        <div class="stack">
-          <div class="card"><h3>Installazione impianti</h3><p>GPL e metano, con collaudo e aggiornamento dei documenti.</p></div>
-          <div class="card"><h3>Manutenzione e diagnosi</h3><p>Controllo periodico, taratura e ricerca guasti sull’impianto.</p></div>
-          <div class="card"><h3>Serbatoi e bombole</h3><p>Sostituzione serbatoi GPL e verifica bombole metano CNG4.</p></div>
-        </div>
-        <p class="note">Le scadenze possono variare in base al tipo di impianto, alla bombola e al veicolo. Per una verifica precisa sono necessari i dati del mezzo.</p>
-        <details class="acc">
-          <summary>Assistenza BRC e documentazione</summary>
-          <div class="acc-body"><p>Siamo officina partner BRC Gas Service: utilizziamo ricambi conformi e documentiamo le lavorazioni eseguite sull’impianto.</p></div>
-        </details>
-        <a class="btn btn-primary btn-block-m" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20una%20verifica%20dell'impianto%20GPL%2Fmetano.%20Modello%2C%20anno%20e%20alimentazione%20del%20veicolo%3A%20">Chiedi una verifica su WhatsApp <span aria-hidden="true">→</span></a>
+  <section class="sec sec--warm" id="tagliando" role="tabpanel" aria-labelledby="tab-tagliando">
+    <div class="wrap">
+      <h2 class="with-num">Tagliando</h2>
+      <p class="lede">Due pacchetti con i controlli elencati uno per uno. Inserisci la cilindrata per una stima indicativa della spesa.</p>
+      <div class="calc field" id="calc" hidden>
+        <label for="cc">Cilindrata del veicolo (cc)</label>
+        <input id="cc" name="cc" type="text" inputmode="numeric" autocomplete="off" placeholder="Es. 1400" aria-describedby="ccAiuto ccErr">
+        <p class="calc-aiuto" id="ccAiuto">La trovi sul libretto, alla voce P.1.</p>
+        <p class="err" id="ccErr" role="alert" hidden></p>
+        <p class="calc-fascia" id="ccFascia" aria-live="polite"></p>
       </div>
-      <div class="split-media ph" style="background-image:url('https://images.pexels.com/photos/8985517/pexels-photo-8985517.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-06-IMPIANTO · COMPONENTI INSTALLATI · 1600 × 2000"></div>
+      <div class="pkg-grid">
+        <article class="card pkg" data-pacchetto="completo" aria-labelledby="pkg-completo">
+          <p class="label">30 CONTROLLI · PROVA SU STRADA</p>
+          <h3 id="pkg-completo">Tagliando completo</h3>
+          <p>Cambio olio e filtri, candele e controllo completo di freni, sterzo, sospensioni e scarico.</p>
+          <div class="pkg-prezzo-box">
+            <p class="label">STIMA INDICATIVA</p>
+            <p class="pkg-prezzo" aria-live="polite">Prezzo in base alla cilindrata</p>
+            <a class="pkg-wa link-testo" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20un%20preventivo%20per%20il%20tagliando%20completo.">Chiedi il preventivo su WhatsApp</a>
+          </div>
+          <a class="btn btn-dark btn-block pkg-prenota" href="prenota.html?servizio=tagliando&amp;pacchetto=completo">Prenota il tagliando completo</a>
+          <details class="acc">
+            <summary>Controlli nell’abitacolo e nel vano motore (9)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Verificare il funzionamento della strumentazione, degli indicatori, di tutte le spie di avvertimento e del clacson.</li>
+              <li>Verificare il funzionamento delle luci interne ed esterne.</li>
+              <li>Controllare lo stato delle spazzole tergicristallo anteriori e posteriori (se presenti) e il funzionamento del sistema lavavetri. Rabboccare il liquido se necessario.</li>
+              <li>Controllare il livello del liquido dei freni ed effettuare il rabbocco se le condizioni del liquido sono soddisfacenti. In caso contrario, proporre la sostituzione, previo accordo con il cliente, con un costo aggiuntivo.</li>
+              <li>Controllare il livello del liquido della frizione e del servosterzo (se applicabile) ed effettuare il rabbocco.</li>
+              <li>Controllare i terminali della batteria e verificarne il corretto fissaggio.</li>
+              <li>Sostituire le candele di accensione (le candele a lunga durata o all’iridio comportano un costo aggiuntivo, se ne è prevista la sostituzione).</li>
+              <li>Controllare il funzionamento e la corsa del freno di stazionamento (freno a mano).</li>
+              <li>Controllare il funzionamento e la corsa del pedale del freno.</li>
+            </ul>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Veicolo sollevato sul ponte (18)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Controllare, se presente, lo stato e la tensione della cinghia del servosterzo o della cinghia dei servizi.</li>
+              <li>Controllare il fissaggio e lo stato di usura dei supporti motore e cambio.</li>
+              <li>Ispezionare il sottoscocca del veicolo per individuare eventuali fenomeni di corrosione o danni.</li>
+              <li>Controllare visivamente il radiatore e il sistema di raffreddamento per individuare eventuali perdite e verificare lo stato dei manicotti.</li>
+              <li>Sostituire il filtro dell’olio.</li>
+              <li>Sostituire l’olio motore (compreso l’olio completamente sintetico, se richiesto).</li>
+              <li>Sostituire il filtro dell’aria.</li>
+              <li>Controllare le pastiglie e i dischi dei freni anteriori e posteriori, misurandone lo spessore.</li>
+              <li>Controllare visivamente lo stato e il fissaggio della scatola guida, delle sospensioni, dei relativi supporti e delle cuffie.</li>
+              <li>Controllare visivamente le testine dello sterzo e i giunti sferici (snodi), verificandone lo stato, l’usura e il fissaggio.</li>
+              <li>Controllare visivamente i giunti dei semiassi, verificandone l’usura e lo stato delle cuffie, nonché i giunti dell’albero di trasmissione (se presente).</li>
+              <li>Controllare visivamente lo stato dell’impianto di scarico, il suo fissaggio e l’eventuale presenza di perdite.</li>
+              <li>Controllare visivamente lo stato e il fissaggio delle tubazioni del carburante, delle tubazioni dei freni, dei tubi flessibili e dei cavi del freno a mano.</li>
+              <li>Verificare l’eventuale presenza di perdite di liquido freni sulle piastre posteriori dei freni (lato interno dei freni).</li>
+              <li>Controllare visivamente gli ammortizzatori anteriori e posteriori, le sospensioni e i relativi supporti, verificando usura, condizioni generali ed eventuali perdite.</li>
+              <li>Controllare lo stato e l’usura di tutti gli pneumatici. Verificare e regolare la pressione di gonfiaggio.</li>
+              <li>Controllare i cuscinetti delle ruote per individuare eventuali giochi eccessivi o rumori anomali.</li>
+              <li>Controllare e fornire indicazioni sull’intervallo previsto per la sostituzione della cinghia di distribuzione.</li>
+            </ul>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Controlli finali (3)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Effettuare una prova su strada.</li>
+              <li>Azzerare l’indicatore di manutenzione (se previsto).</li>
+              <li>Apporre il timbro sul libretto di manutenzione.</li>
+            </ul>
+            </div>
+          </details>
+        </article>
+        <article class="card pkg" data-pacchetto="intermedio" aria-labelledby="pkg-intermedio">
+          <p class="label">23 CONTROLLI · PROVA SU STRADA</p>
+          <h3 id="pkg-intermedio">Tagliando intermedio</h3>
+          <p>Cambio olio e filtro dell’olio con i controlli di sicurezza su freni, pneumatici e sottoscocca.</p>
+          <div class="pkg-prezzo-box">
+            <p class="label">STIMA INDICATIVA</p>
+            <p class="pkg-prezzo" aria-live="polite">Prezzo in base alla cilindrata</p>
+            <a class="pkg-wa link-testo" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20un%20preventivo%20per%20il%20tagliando%20intermedio.">Chiedi il preventivo su WhatsApp</a>
+          </div>
+          <a class="btn btn-dark btn-block pkg-prenota" href="prenota.html?servizio=tagliando&amp;pacchetto=intermedio">Prenota il tagliando intermedio</a>
+          <details class="acc">
+            <summary>Controlli nell’abitacolo e nel vano motore (8)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Verificare il funzionamento della strumentazione, degli indicatori, di tutte le spie di avvertimento e del clacson.</li>
+              <li>Verificare il funzionamento delle luci interne ed esterne.</li>
+              <li>Controllare lo stato delle spazzole tergicristallo anteriori e posteriori (se presenti) e il funzionamento del sistema lavavetri.</li>
+              <li>Controllare il livello del liquido dei freni ed effettuare il rabbocco se le condizioni del liquido sono soddisfacenti. In caso contrario, proporre la sostituzione, previo accordo con il cliente, con un costo aggiuntivo.</li>
+              <li>Controllare i terminali della batteria e verificarne il corretto fissaggio.</li>
+              <li>Controllare il funzionamento della frizione.</li>
+              <li>Controllare il funzionamento e la corsa del freno di stazionamento (freno a mano).</li>
+              <li>Controllare il funzionamento e la corsa del pedale del freno.</li>
+            </ul>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Veicolo sollevato sul ponte (12)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Ispezionare il sottoscocca del veicolo per individuare eventuali fenomeni di corrosione o danni.</li>
+              <li>Sostituire il filtro dell’olio.</li>
+              <li>Sostituire l’olio motore (compreso l’olio completamente sintetico, se richiesto).</li>
+              <li>Controllare visivamente lo stato e il fissaggio dei supporti dello sterzo e delle sospensioni, nonché delle relative cuffie.</li>
+              <li>Controllare visivamente i giunti dei semiassi, verificandone l’usura e lo stato delle cuffie, nonché i giunti dell’albero di trasmissione (se presente).</li>
+              <li>Controllare visivamente lo stato dell’impianto di scarico, il suo fissaggio e l’eventuale presenza di perdite.</li>
+              <li>Controllare visivamente lo stato e il fissaggio delle tubazioni del carburante, delle tubazioni dei freni, dei tubi flessibili e dei cavi del freno a mano.</li>
+              <li>Controllare visivamente l’eventuale presenza di perdite di liquido freni sulle piastre posteriori dei freni (senza smontare le ruote).</li>
+              <li>Controllare visivamente lo stato degli ammortizzatori anteriori e posteriori e delle sospensioni, verificando eventuali perdite.</li>
+              <li>Controllare lo stato di tutti gli pneumatici e verificare e regolare la pressione di gonfiaggio.</li>
+              <li>Controllare i cuscinetti delle ruote per individuare eventuali giochi eccessivi o rumori anomali.</li>
+              <li>Controllare e fornire indicazioni sull’intervallo previsto per la sostituzione della cinghia di distribuzione (su richiesta del cliente, con eventuale costo aggiuntivo).</li>
+            </ul>
+            </div>
+          </details>
+          <details class="acc">
+            <summary>Controlli finali (3)</summary>
+            <div class="acc-body">
+            <ul class="checklist">
+              <li>Effettuare una prova su strada.</li>
+              <li>Azzerare l’indicatore di manutenzione (se previsto).</li>
+              <li>Apporre il timbro sul libretto di manutenzione.</li>
+            </ul>
+            </div>
+          </details>
+        </article>
+      </div>
+      <p class="note pkg-note">Stima indicativa basata sui prezzi medi di mercato per un’officina indipendente: non è un preventivo. La cifra finale dipende da veicolo, olio e ricambi; sostituzioni aggiuntive solo previo accordo. Per moto e autocarri chiedi un preventivo.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="prenota.html?servizio=tagliando">Prenota online un intervento di manutenzione</a>
+        <a class="btn btn-outline" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20informazioni%20sul%20tagliando.%20Modello%2C%20anno%20e%20cilindrata%3A%20">Scrivi su WhatsApp</a>
+      </div>
     </div>
   </section>
 
@@ -160,6 +278,7 @@
           <div class="card"><h3>Elettrauto</h3><p>Batteria, ricarica, impianto elettrico e sensori.</p></div>
           <div class="card"><h3>Diagnosi benzina e diesel</h3><p>Lettura centraline e ricerca guasti con strumento.</p></div>
         </div>
+        <a class="link-quiet officina-link" href="#tagliando">Tagliando completo e intermedio <span aria-hidden="true">→</span></a>
         <a class="btn btn-primary btn-block-m" href="tel:+390733815450">Chiama l’officina</a>
       </div>
       <div class="split-media ph" style="background-image:url('https://images.pexels.com/photos/5158091/pexels-photo-5158091.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-08-OFFICINA · BANCO ORDINATO"></div>
@@ -180,6 +299,28 @@
         </ul>
         <a class="btn btn-primary btn-block-m" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20un%20preventivo%20per%20gli%20pneumatici.%20Veicolo%20e%20misura%20delle%20gomme%3A%20">Chiedi un preventivo su WhatsApp</a>
       </div>
+    </div>
+  </section>
+
+  <section class="sec sec--warm" id="gpl" role="tabpanel" aria-labelledby="tab-gpl">
+    <div class="wrap split">
+      <div>
+        <h2 class="with-num">GPL e metano</h2>
+        <p class="lede">Installiamo e manteniamo impianti a gas con supporto BRC. Interveniamo su serbatoi GPL, bombole metano CNG4 e diagnosi dell’impianto, seguendo il veicolo anche negli anni successivi.</p>
+        <div class="media-m ph" style="background-image:url('https://images.pexels.com/photos/8985517/pexels-photo-8985517.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-06-IMPIANTO · RIDUTTORE BRC NEL VANO MOTORE"></div>
+        <div class="stack">
+          <div class="card"><h3>Installazione impianti</h3><p>GPL e metano, con collaudo e aggiornamento dei documenti.</p></div>
+          <div class="card"><h3>Manutenzione e diagnosi</h3><p>Controllo periodico, taratura e ricerca guasti sull’impianto.</p></div>
+          <div class="card"><h3>Serbatoi e bombole</h3><p>Sostituzione serbatoi GPL e verifica bombole metano CNG4.</p></div>
+        </div>
+        <p class="note">Le scadenze possono variare in base al tipo di impianto, alla bombola e al veicolo. Per una verifica precisa sono necessari i dati del mezzo.</p>
+        <details class="acc">
+          <summary>Assistenza BRC e documentazione</summary>
+          <div class="acc-body"><p>Siamo officina partner BRC Gas Service: utilizziamo ricambi conformi e documentiamo le lavorazioni eseguite sull’impianto.</p></div>
+        </details>
+        <a class="btn btn-primary btn-block-m" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20una%20verifica%20dell'impianto%20GPL%2Fmetano.%20Modello%2C%20anno%20e%20alimentazione%20del%20veicolo%3A%20">Chiedi una verifica su WhatsApp <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="split-media ph" style="background-image:url('https://images.pexels.com/photos/8985517/pexels-photo-8985517.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-06-IMPIANTO · COMPONENTI INSTALLATI · 1600 × 2000"></div>
     </div>
   </section>
 
@@ -290,7 +431,8 @@
   </a>
 </nav>
 
-<script src="assets/js/dati.js?v=14" defer></script>
-<script src="assets/js/main.js?v=14" defer></script>
+<script src="assets/js/dati.js?v=17" defer></script>
+<script src="assets/js/main.js?v=17" defer></script>
+<script src="assets/js/tagliando.js?v=17" defer></script>
 </body>
 </html>

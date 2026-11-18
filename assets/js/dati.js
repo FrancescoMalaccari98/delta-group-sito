@@ -64,6 +64,26 @@
       tagliando: { label: 'Tagliando / officina', durata: 90, posti: 1 }
     },
     preavvisoOre: 24,
-    orizzonteGiorni: 60
+    orizzonteGiorni: 60,
+
+    /* ------------------------------------------------------------------
+       TAGLIANDO — spesa indicativa per cilindrata (scheda Tagliando di servizi.html)
+       fasce: limite superiore di ogni fascia in cc; null = «oltre».
+       prezzi: forchetta [minimo, massimo] in euro interi, una per fascia,
+       nello stesso ordine. Al posto di una forchetta si può scrivere null:
+       quella fascia mostrerà «Prezzo su richiesta».
+       ATTENZIONE: sono STIME basate sui prezzi medi di mercato per un'officina
+       indipendente (fonti consultate a novembre 2026: officina.it,
+       Automobile360, costorealeauto.it, cartest2016.it, espertoautoricambi.it,
+       Norauto, Euromaster). Vanno confermate o sostituite dall'officina
+       prima della pubblicazione online.
+       ------------------------------------------------------------------ */
+    tagliando: {
+      fasce: [1200, 1600, 2000, 2500, null],
+      prezzi: {
+        completo:   [[150, 220], [180, 280], [230, 350], [280, 420], [350, 550]],
+        intermedio: [[70, 110],  [80, 130],  [100, 160], [120, 190], [150, 240]]
+      }
+    }
   };
 })();

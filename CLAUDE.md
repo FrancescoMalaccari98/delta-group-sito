@@ -24,7 +24,7 @@ veicolo, quindi si invita al contatto per la verifica.
 
 ```
 index.html        Home: hero, credenziali, servizi, focus GPL, perché, galleria, contatti, footer
-servizi.html      Barra a schede sticky + GPL/Revisioni/Officina/Pneumatici/Altri + FAQ
+servizi.html      Barra a schede sticky + Tagliando/Revisioni/Officina/Pneumatici/GPL/Altri + FAQ
 contatti.html     Dati, orari, mappa con consenso, form 4 campi
 prenota.html      Prenotazione in 3 passi: calendario e slot, dati veicolo e cliente, riepilogo
 privacy.html      Privacy Policy (completa, due punti da confermare — vedi DECISIONI.md A6)
@@ -35,11 +35,12 @@ assets/css/style.css     Foglio unico, mobile-first
 assets/js/dati.js        Orari, ferie, festivi calcolati, recapiti, durate. Caricare per primo
 assets/js/main.js        Header, menu, orari, schede, consenso cookie, mappa, form, reveal
 assets/js/prenota-api.js Livello API (oggi mock): unico file da toccare al collegamento del backend
-assets/js/prenota.js     Interfaccia dei tre passi della prenotazione
+assets/js/prenota.js     Interfaccia dei tre passi della prenotazione (accetta ?servizio=&pacchetto=&cc=)
+assets/js/tagliando.js   Stima della spesa del tagliando per cilindrata (scheda Tagliando di servizi.html)
 assets/img/FOTO.md       Elenco delle 9 foto con nomi file definitivi
 ```
 
-Orari, ferie e recapiti stanno **solo** in `assets/js/dati.js`: cambiarli lì, poi allineare gli
+Orari, ferie, recapiti, fasce e prezzi del tagliando stanno **solo** in `assets/js/dati.js`: cambiarli lì, poi allineare gli
 elenchi scritti nelle pagine e il blocco JSON-LD. CSS e JS sono richiamati con `?v=N`: alzare il
 numero in tutte le pagine a ogni modifica.
 
@@ -147,6 +148,9 @@ Il dettaglio e le alternative stanno in `DECISIONI.md`. In sintesi:
 - [ ] Confermare il segnaposto della mappa (43.2971, 13.7268: centro della via, non il civico 161)
 - [ ] Dominio canonico definitivo (`www` o no) e HTTPS attivo, poi regole `.htaccess` scommentate
 - [ ] Prezzo della revisione e numero di autorizzazione MCTC
+- [ ] **Prima di pubblicare:** le forchette di prezzo del tagliando in `dati.js` (`tagliando.prezzi`) sono
+      STIME da medie di mercato (novembre 2026), non tariffe dell'officina: farle confermare o sostituire
+      dall'officina, insieme alle 5 fasce di cilindrata. Il sito le presenta come «stima indicativa»
 - [ ] Conferma dell'anno "Revisioni in sede dal 1997" ed eventuale pagina "Chi siamo"
 - [ ] Conferma dei due punti aperti in Privacy Policy (conservazione 24 mesi, destinatari)
 - [ ] Caratteri `.woff2` locali in `assets/font/` (CSS già pronto in fondo a `style.css`)

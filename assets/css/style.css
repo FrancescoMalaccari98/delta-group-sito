@@ -871,3 +871,42 @@ html.is-loading,html.is-loading body{overflow:hidden}
 .gallery{scroll-padding:0 var(--gutter)}
 .gallery-head .label{white-space:nowrap}
 @media (max-width:1023.98px){.sec-head .link-quiet{margin-top:16px}}
+
+/* =========================================================
+   Pagina tagliando — pacchetti, cilindrata, elenchi dei controlli
+   ========================================================= */
+.calc{max-width:560px;margin:0 0 32px;padding:20px;background:var(--white);border:1px solid var(--border-l);border-radius:var(--r-l)}
+.calc[hidden]{display:none}
+.calc input{max-width:240px}
+.calc-aiuto{margin-top:8px;font-size:16px;line-height:1.5;color:var(--muted-l)}
+.calc-fascia{margin-top:12px;font:500 12.5px var(--f-mono);letter-spacing:.12em;color:var(--text-l)}
+.calc-fascia:empty{display:none}
+.pkg-grid{display:grid;gap:16px}
+.pkg{display:flex;flex-direction:column;padding:24px 20px}
+.pkg .label{font-size:12.5px;margin-bottom:8px;color:var(--muted-l)}
+.pkg h3{font-size:32px;line-height:1.02;margin:0 0 10px;color:var(--text-l)}
+.pkg-prezzo-box{margin:20px 0;padding:16px 18px;background:var(--warm);border:1px solid var(--border-l);border-radius:var(--r-m)}
+.pkg-prezzo-box .label{margin-bottom:4px}
+.pkg .pkg-prezzo{font-family:var(--f-title);font-weight:700;font-size:26px;line-height:1.15;color:var(--text-l)}
+.pkg-wa{display:inline-flex;align-items:center;min-height:48px;font-size:16px;font-weight:600}
+.pkg-wa[hidden]{display:none}
+.pkg .pkg-prenota{margin-bottom:12px}
+.pkg .acc summary{font-size:17px}
+.checklist{list-style:none;margin:0;padding:0}
+.checklist li{position:relative;padding:10px 0 10px 24px;font-size:16px;line-height:1.5;color:var(--muted-l);border-bottom:1px solid #EDEBE6;text-wrap:pretty}
+.checklist li:last-child{border-bottom:0}
+.checklist li::before{content:"";position:absolute;left:2px;top:17px;width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid var(--accent)}
+.pkg-note{margin:24px 0 0}
+.cta-row{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:24px}
+.cta-row .btn{flex:1 1 240px}
+@media (min-width:1024px){
+  .pkg-grid{grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  .pkg{padding:32px}
+  .pkg h3{font-size:36px}
+  .pkg .pkg-prezzo{font-size:30px}
+  .pkg-note{max-width:760px}
+  .cta-row .btn{flex:0 0 auto;min-height:52px}
+}
+.officina-link{margin:0 0 20px}
+.pkg-wa.link-testo{border-bottom:0;padding-bottom:0;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#C9C4B9}
+.pkg-wa.link-testo:hover{text-decoration-color:var(--accent)}

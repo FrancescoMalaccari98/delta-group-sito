@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="assets/css/style.css?v=14">
+<link rel="stylesheet" href="assets/css/style.css?v=17">
 <script>/* lo splash si vede al massimo una volta al giorno: per chi torna spesso è solo attesa */
 (function(){var r=document.documentElement;try{var t=+localStorage.getItem('dg-splash')||0;if(Date.now()-t<86400000){r.className+=' no-splash';return}localStorage.setItem('dg-splash',String(Date.now()))}catch(e){}r.className+=' splashing'})();</script>
 </head>
@@ -80,10 +80,11 @@
   <nav class="drawer-nav" aria-label="Menu">
     <a href="index.html" class="is-current" aria-current="page"><span>Home</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html"><span>Servizi</span><em aria-hidden="true">›</em></a>
-    <a href="servizi.html#gpl"><span>GPL e metano</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#tagliando"><span>Tagliando</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#revisioni"><span>Revisioni</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#officina"><span>Officina</span><em aria-hidden="true">›</em></a>
     <a href="servizi.html#pneumatici"><span>Pneumatici</span><em aria-hidden="true">›</em></a>
+    <a href="servizi.html#gpl"><span>GPL e metano</span><em aria-hidden="true">›</em></a>
     <a href="prenota.html"><span>Prenota online</span><em aria-hidden="true">›</em></a>
     <a href="contatti.html"><span>Contatti</span><em aria-hidden="true">›</em></a>
   </nav>
@@ -138,13 +139,13 @@
         <a class="link-quiet" href="servizi.html">Vai alla pagina Servizi <span aria-hidden="true">→</span></a>
       </div>
       <div class="svc-stack">
-        <a class="svc" href="servizi.html#gpl" style="--i:0">
-          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-02-GPL · MONTAGGIO IMPIANTO BRC"></span></span>
+        <a class="svc" href="servizi.html#tagliando" style="--i:0">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/4116231/pexels-photo-4116231.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-10-TAGLIANDO · CAMBIO OLIO SUL PONTE"></span></span>
           <span class="svc-body">
             <span class="svc-num outline-num" aria-hidden="true">01</span>
-            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>SPECIALIZZAZIONE</span>
-            <span class="svc-title">GPL e metano</span>
-            <span class="svc-text">Installazione, manutenzione, serbatoi GPL, bombole metano CNG4 e assistenza BRC.</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>MANUTENZIONE</span>
+            <span class="svc-title">Tagliando</span>
+            <span class="svc-text">Tagliando completo o intermedio, con stima della spesa in base alla cilindrata.</span>
             <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
           </span>
         </a>
@@ -175,6 +176,16 @@
             <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>GOMME</span>
             <span class="svc-title">Pneumatici</span>
             <span class="svc-text">Controllo, sostituzione, assetto e convergenza.</span>
+            <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <a class="svc" href="servizi.html#gpl" style="--i:4">
+          <span class="svc-media"><span class="svc-img ph" style="background-image:url('https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&cs=tinysrgb&w=1400')" data-ph="FOTO-02-GPL · MONTAGGIO IMPIANTO BRC"></span></span>
+          <span class="svc-body">
+            <span class="svc-num outline-num" aria-hidden="true">05</span>
+            <span class="svc-kicker"><span class="tri" aria-hidden="true"></span>SPECIALIZZAZIONE</span>
+            <span class="svc-title">GPL e metano</span>
+            <span class="svc-text">Installazione, manutenzione, serbatoi GPL, bombole metano CNG4 e assistenza BRC.</span>
             <span class="svc-go">Scopri il servizio <span aria-hidden="true">→</span></span>
           </span>
         </a>
@@ -275,6 +286,7 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sostituzione serbatoi GPL e verifica bombole metano CNG4", "serviceType": "Impianti a gas" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Revisioni auto e moto in sede", "serviceType": "Revisione veicoli" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Meccanica, elettrauto e diagnosi multimarca", "serviceType": "Officina" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tagliando completo e tagliando intermedio", "serviceType": "Officina", "url": "https://www.delta-group.it/servizi.html#tagliando" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pneumatici, assetto e convergenza", "serviceType": "Pneumatici" } }
     ]
   }
@@ -331,7 +343,7 @@
   </a>
 </nav>
 
-<script src="assets/js/dati.js?v=14" defer></script>
-<script src="assets/js/main.js?v=14" defer></script>
+<script src="assets/js/dati.js?v=17" defer></script>
+<script src="assets/js/main.js?v=17" defer></script>
 </body>
 </html>

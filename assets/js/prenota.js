@@ -458,6 +458,32 @@
     vaiAlPasso(3);
   }
 
+  /* ---------- arrivo da un'altra pagina ----------
+     prenota.html?servizio=tagliando&pacchetto=completo&cc=1400 (dalla scheda Tagliando di servizi.html):
+     preseleziona il servizio e, se le note sono vuote, scrive pacchetto e cilindrata. */
+  var proprio = function (o, k) { return Object.prototype.hasOwnProperty.call(o, k); };
+  var par = {};
+  location.search.replace(/^\?/, '').split('&').forEach(function (kv) {
+    var p = kv.split('=');
+    if (!p[0]) return;
+    try { par[decodeURIComponent(p[0])] = decodeURIComponent((p[1] || '').replace(/\+/g, ' ')); } catch (e) {}
+  });
+  if (par.servizio && proprio(API.servizi, par.servizio)) {
+    stato.servizio = par.servizio;
+    qa('.seg-opt').forEach(function (x) {
+      var on = x.getAttribute('data-serv') === par.servizio;
+      x.classList.toggle('is-on', on);
+      x.setAttribute('aria-checked', on ? 'true' : 'false');
+    });
+  }
+  var PACCHETTI = { completo: 'Tagliando completo', intermedio: 'Tagliando intermedio' };
+  var campoNote = q('#note');
+  if (par.pacchetto && proprio(PACCHETTI, par.pacchetto) && campoNote && !campoNote.value.trim()) {
+    var ccPar = parseInt(par.cc, 10);
+    campoNote.value = PACCHETTI[par.pacchetto] + (ccPar >= 50 && ccPar <= 8000
+      ? ' · cilindrata ' + String(ccPar).replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' cc' : '');
+  }
+
   /* ---------- avvio ---------- */
   var campoAnno = q('#anno');
   if (campoAnno) campoAnno.max = String(new Date().getFullYear() + 1);
