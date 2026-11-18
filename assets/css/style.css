@@ -910,3 +910,64 @@ html.is-loading,html.is-loading body{overflow:hidden}
 .officina-link{margin:0 0 20px}
 .pkg-wa.link-testo{border-bottom:0;padding-bottom:0;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#C9C4B9}
 .pkg-wa.link-testo:hover{text-decoration-color:var(--accent)}
+
+/* =========================================================
+   Hero — «Che cosa serve alla tua auto?»
+   Le voci funzionano come il selettore del cambio: una linea arancione
+   scivola sulla voce scelta, sotto si apre la risposta e la foto cambia.
+   Senza JavaScript le voci restano link alle schede di servizi.html.
+   ========================================================= */
+.needs-wrap{margin:4px 0 16px;animation:heroRise .8s var(--ease) .8s both}
+.needs-q{font-size:17px;font-weight:600;color:var(--text-d);margin-bottom:4px}
+.needs{position:relative;display:flex;flex-wrap:wrap;gap:0 24px}
+.need{position:relative;display:inline-flex;align-items:center;min-height:48px;font-family:var(--f-title);font-weight:600;font-size:22px;line-height:1;color:var(--muted-d);transition:color .2s ease}
+.need:hover,.need[aria-expanded="true"]{color:var(--text-d)}
+.need[aria-expanded="true"]{anchor-name:--need}
+/* indicatore che scivola fra le voci (anchor positioning) */
+.needs::after{content:"";position:absolute;position-anchor:--need;left:anchor(left);right:anchor(right);top:calc(anchor(bottom) - 9px);border-bottom:3px solid var(--accent);pointer-events:none}
+.needs:not(:has(.need[aria-expanded="true"]))::after{display:none}
+@media (prefers-reduced-motion:no-preference){.needs::after{transition:left .35s var(--ease),right .35s var(--ease),top .35s var(--ease)}}
+@supports not (position-anchor:--need){
+  .needs::after{display:none}
+  .need[aria-expanded="true"]{text-decoration:underline 3px var(--accent);text-underline-offset:10px}
+}
+/* risposte */
+.need-panel--start{animation:heroRise .8s var(--ease) .9s both}
+.need-panel .hero-cta{animation:none}
+.hero.is-touched .need-panel{animation:needIn .35s var(--ease) both}
+@keyframes needIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.need-text{max-width:46ch;margin-bottom:16px;font-size:17px;line-height:1.55;color:rgba(244,246,248,.86)}
+.need-calc{max-width:440px;margin:0 0 20px}
+.hero .need-calc label{color:var(--text-d)}
+.need-calc input{max-width:220px}
+.need-stima{display:grid;margin-top:8px}
+.need-stima:empty{display:none}
+.need-stima-riga{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--border-d);font-size:16px;color:var(--muted-d)}
+.need-stima-riga b{font-family:var(--f-title);font-weight:700;font-size:24px;color:var(--text-d);white-space:nowrap}
+.need-nota{margin-top:8px;font-size:16px;line-height:1.45;color:var(--muted-d)}
+/* cambio foto: secondo livello con la stessa sagoma diagonale, entra in dissolvenza */
+.hero-swap{animation:none;opacity:0;background-size:cover;background-position:center;transition:opacity .6s ease}
+.hero-swap.is-on{opacity:1}
+@media (min-width:1024px){
+  .hero-inner>.needs-wrap{max-width:720px}
+  .need{font-size:24px}
+}
+
+/* =========================================================
+   Transizioni fra le pagine (cross-document view transitions)
+   Solo nei browser che le supportano; gli altri navigano come sempre.
+   ========================================================= */
+@media (prefers-reduced-motion:no-preference){
+  @view-transition{navigation:auto}
+  .site-header{view-transition-name:site-header}
+  ::view-transition-old(root){animation:.22s ease both pageOut}
+  ::view-transition-new(root){animation:.38s var(--ease) both pageIn}
+}
+@keyframes pageOut{to{opacity:0}}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}}
+/* desktop: contenuto ancorato in alto, così aprire una risposta non fa saltare il titolo */
+@media (min-width:1024px){
+  .hero{justify-content:flex-start;padding-top:calc(var(--header-h) + 64px)}
+  @supports (min-height:100svh){.hero{padding-top:calc(var(--header-h) + 64px)}}
+  .hero-inner{padding-bottom:56px}
+}

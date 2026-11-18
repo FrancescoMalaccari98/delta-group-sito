@@ -37,6 +37,7 @@ assets/js/main.js        Header, menu, orari, schede, consenso cookie, mappa, fo
 assets/js/prenota-api.js Livello API (oggi mock): unico file da toccare al collegamento del backend
 assets/js/prenota.js     Interfaccia dei tre passi della prenotazione (accetta ?servizio=&pacchetto=&cc=)
 assets/js/tagliando.js   Stima della spesa del tagliando per cilindrata (scheda Tagliando di servizi.html)
+assets/js/hero.js        Hero della home: selettore «Che cosa serve alla tua auto?» con risposte e cambio foto
 assets/img/FOTO.md       Elenco delle 9 foto con nomi file definitivi
 ```
 
@@ -119,6 +120,10 @@ garanzia": usare "Ricambi conformi e lavorazioni documentate". Se si usa la sigl
 - Form: 4 campi (nome, telefono o e-mail, servizio, messaggio), validazione inline, invio via fetch,
   fallback POST classico. **Non chiedere targa, libretto o altri dati tecnici al primo contatto.**
 - Accordion nativi `<details>`: funzionano senza JavaScript.
+- Hero della home: selettore dei 5 servizi (link a servizi.html senza JS); la voce scelta apre la
+  risposta (stima tagliando, prenota, chiama, WhatsApp) e cambia la foto. Linea arancione con anchor
+  positioning, ripiego sottolineato. Movimento solo in risposta all'utente.
+- Transizioni fra pagine con `@view-transition` (solo browser compatibili, mai con riduci movimento).
 - Velo di caricamento della prenotazione: i tre pezzi del marchio si compongono e si separano in
   ciclo (tre triangoli CSS). Niente rotazioni del logo.
 - Animazioni discrete e `prefers-reduced-motion` rispettato. Vietati parallasse aggressivo, elementi

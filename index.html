@@ -26,7 +26,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="assets/css/style.css?v=17">
+<link rel="stylesheet" href="assets/css/style.css?v=18">
 <script>/* lo splash si vede al massimo una volta al giorno: per chi torna spesso è solo attesa */
 (function(){var r=document.documentElement;try{var t=+localStorage.getItem('dg-splash')||0;if(Date.now()-t<86400000){r.className+=' no-splash';return}localStorage.setItem('dg-splash',String(Date.now()))}catch(e){}r.className+=' splashing'})();</script>
 </head>
@@ -103,13 +103,67 @@
 <main id="main">
   <section class="hero">
     <div class="hero-media ph" role="img" aria-label="Ingresso dell'officina Delta Group con un'auto sul ponte sollevatore" style="background-image:url('https://images.pexels.com/photos/33814734/pexels-photo-33814734.jpeg?auto=compress&cs=tinysrgb&w=1600')" data-ph="FOTO-01-HERO · INGRESSO OFFICINA, AUTO SUL PONTE"></div>
+    <div class="hero-media hero-swap" aria-hidden="true"></div>
     <div class="wrap hero-inner">
       <p class="eyebrow"><span class="tri" aria-hidden="true"></span>AUTOFFICINA E CENTRO REVISIONI · CIVITANOVA MARCHE</p>
       <h1><span class="ln"><span>Specialisti in</span></span> <span class="ln ln--accent"><span>GPL e metano</span></span></h1>
       <p class="lede">Impianti, bombole, revisioni, officina e pneumatici. Un unico centro tecnico per la tua auto.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="servizi.html">Scopri i servizi <span aria-hidden="true">→</span></a>
-        <a class="link-arrow" href="contatti.html">Dove siamo <span aria-hidden="true">→</span></a>
+      <div class="needs-wrap">
+        <p class="needs-q" id="needsQ">Che cosa serve alla tua auto?</p>
+        <div class="needs" role="group" aria-labelledby="needsQ">
+          <a class="need" href="servizi.html#tagliando" data-need="tagliando" data-foto="https://images.pexels.com/photos/4116231/pexels-photo-4116231.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">Tagliando</a>
+          <a class="need" href="servizi.html#revisioni" data-need="revisioni" data-foto="https://images.pexels.com/photos/33814736/pexels-photo-33814736.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">Revisione</a>
+          <a class="need" href="servizi.html#officina" data-need="officina" data-foto="https://images.pexels.com/photos/5158091/pexels-photo-5158091.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">Officina</a>
+          <a class="need" href="servizi.html#pneumatici" data-need="pneumatici" data-foto="https://images.pexels.com/photos/4116170/pexels-photo-4116170.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">Pneumatici</a>
+          <a class="need" href="servizi.html#gpl" data-need="gpl" data-foto="https://images.pexels.com/photos/8985456/pexels-photo-8985456.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600">GPL e metano</a>
+        </div>
+      </div>
+      <div class="need-panel need-panel--start" id="need-start">
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="servizi.html">Scopri i servizi <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="contatti.html">Dove siamo <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="need-panel" id="need-tagliando" hidden>
+        <p class="need-text">Tagliando completo o intermedio: inserisci la cilindrata per una stima della spesa.</p>
+        <div class="need-calc field">
+          <label for="heroCc">Cilindrata (cc)</label>
+          <input id="heroCc" type="text" inputmode="numeric" autocomplete="off" placeholder="Es. 1400" aria-describedby="heroStimaNota">
+          <p class="need-stima" id="heroStima" aria-live="polite"></p>
+          <p class="need-nota" id="heroStimaNota">Stima indicativa da prezzi medi di mercato: non è un preventivo.</p>
+        </div>
+        <div class="hero-cta">
+          <a class="btn btn-primary need-prenota" href="prenota.html?servizio=tagliando">Prenota il tagliando <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="servizi.html#tagliando">Vedi tutti i controlli <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="need-panel" id="need-revisioni" hidden>
+        <p class="need-text">Controlli periodici per auto e moto, effettuati direttamente in sede.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="prenota.html?servizio=revisione">Prenota la revisione <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="servizi.html#revisioni">Dettagli del servizio <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="need-panel" id="need-officina" hidden>
+        <p class="need-text">Meccanica, elettrauto e diagnosi multimarca.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="tel:+390733815450">Chiama l’officina <span aria-hidden="true">→</span></a>
+          <a class="link-arrow" href="servizi.html#officina">Dettagli del servizio <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="need-panel" id="need-pneumatici" hidden>
+        <p class="need-text">Controllo, sostituzione, assetto e convergenza.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20un%20preventivo%20per%20gli%20pneumatici.%20Veicolo%20e%20misura%20delle%20gomme%3A%20">Chiedi un preventivo su WhatsApp</a>
+          <a class="link-arrow" href="servizi.html#pneumatici">Dettagli del servizio <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="need-panel" id="need-gpl" hidden>
+        <p class="need-text">Installazione, manutenzione, serbatoi GPL, bombole metano CNG4 e assistenza BRC.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://wa.me/393487619808?text=Salve%2C%20vorrei%20una%20verifica%20dell'impianto%20GPL%2Fmetano.%20Modello%2C%20anno%20e%20alimentazione%20del%20veicolo%3A%20">Chiedi una verifica su WhatsApp</a>
+          <a class="link-arrow" href="servizi.html#gpl">Dettagli del servizio <span aria-hidden="true">→</span></a>
+        </div>
       </div>
       <p class="badge badge--dark js-stato" hidden><span class="dot"></span><span class="txt"></span></p>
     </div>
@@ -343,7 +397,9 @@
   </a>
 </nav>
 
-<script src="assets/js/dati.js?v=17" defer></script>
-<script src="assets/js/main.js?v=17" defer></script>
+<script src="assets/js/dati.js?v=18" defer></script>
+<script src="assets/js/main.js?v=18" defer></script>
+<script src="assets/js/tagliando.js?v=18" defer></script>
+<script src="assets/js/hero.js?v=18" defer></script>
 </body>
 </html>
